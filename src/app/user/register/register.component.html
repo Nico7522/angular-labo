@@ -1,1 +1,53 @@
-<p>register works!</p>
+<h3>Créer un compte</h3>
+<section class="register-form">
+    <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input type="text" matInput  
+                 formControlName="firstName"
+                >
+                 @if (registerForm.get("firstName")?.invalid) {
+                    <mat-error>Champ requis*</mat-error>
+                 }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input formControlName="lastName" type="text" matInput >
+            @if (registerForm.get("lastName")?.invalid) {
+                <mat-error >Champ requis*</mat-error>
+             }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Numéro de téléphone</mat-label>
+            <input formControlName="phoneNumber" type="text" matInput >
+            @if (registerForm.get("phoneNumber")?.invalid) {
+                <mat-error >Numéro invalide*</mat-error>
+             }
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Email</mat-label>
+            <input formControlName="email" type="email" matInput >
+            @if (registerForm.get("email")?.invalid) {
+                <mat-error >Email invalide*</mat-error>
+             }
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Mot de passe</mat-label>
+            <input formControlName="password" type="password" matInput >
+            @if (registerForm.get("password")?.invalid) {
+                <mat-error >Veuillez rentrer un mot de passe valide</mat-error>
+             }
+          </mat-form-field>
+          <div class="button">
+              <button mat-flat-button color="primary">Créer le compte</button>
+          </div>
+
+      </form>
+
+      @if (message) {
+        <p [class]="message === 'Erreur' ? 'error' : 'success'">{{message}}</p>
+      }
+</section>

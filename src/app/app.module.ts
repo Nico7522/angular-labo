@@ -9,10 +9,13 @@ import { MaterialModule } from './shared/material/material.module';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, MaterialModule, HttpClientModule, ReactiveFormsModule],
+  declarations: [AppComponent, HomeComponent, SnackbarComponent],
+  imports: [AppRoutingModule, SharedModule, MaterialModule, HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule],
   providers: [
     provideAnimationsAsync()
   ],

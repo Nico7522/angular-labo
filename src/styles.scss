@@ -45,6 +45,10 @@ html, body {
   margin: 0px;
 }
 
+.mat-drawer-container {
+  z-index: 10;
+}
+
 // .mat-sidenav-container  {
 //   // height: 100vh;
 // }
@@ -78,7 +82,7 @@ html, body {
   color: yellow;
 }
 .mat-sidenav-container .mat-sidenav nav a.active {
-  color: yellow;
+  color: white;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -90,6 +94,7 @@ html, body {
 .mat-sidenav-container .mat-sidenav-content .mat-toolbar header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -114,7 +119,7 @@ html, body {
   color: rgb(6, 4, 39);
 }
 .mat-sidenav-container .mat-sidenav-content .mat-toolbar header nav a.active {
-  color: rgb(2, 6, 34);
+  color: white;
   background-color: rgba(0, 0, 0, 0.2);
 }
 

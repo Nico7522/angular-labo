@@ -12,7 +12,8 @@ export class ModalService {
   openModal(component: ComponentType<unknown> ,enterAnimationDuration: string, exitAnimationDuration: string): void {
     this._dialog.open(component, {
       width: '300px',
-      height: '300px',
+      height: '350px',
+      hasBackdrop: false,
       enterAnimationDuration,
       exitAnimationDuration,
     });

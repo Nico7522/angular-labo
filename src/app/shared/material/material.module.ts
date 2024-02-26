@@ -15,13 +15,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -32,14 +30,11 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     MatSidenavModule,
     FlexLayoutModule,
-    BrowserModule
   ],
   exports: [
     MatButtonModule,
-    BrowserModule,
     MatToolbarModule,
     MatIconModule,
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDialogActions,
@@ -50,7 +45,7 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   providers: [
     provideAnimationsAsync(),
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { autoFocus: true } },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { autoFocus: true }, },
   ],
 })
 export class MaterialModule {}

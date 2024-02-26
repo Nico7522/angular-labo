@@ -4,11 +4,18 @@
 		<label>My Shoes</label> 
     <hr/>   
 		<nav>
-			<a routerLink="home"      (click)="clickHandler()" routerLinkActive="active">Acceuil</a>
-			<a routerLink="about"     (click)="clickHandler()" routerLinkActive="active">Produit</a>
-			<a (click)="clickHandlerLogin()" routerLinkActive="active">Se connecter</a>
-			<a routerLink="sign-up"   (click)="clickHandler()" routerLinkActive="active">Créer un compte</a>
-			<a routerLink="contact"   (click)="clickHandler()" routerLinkActive="active">À propos</a>
+			<a routerLink="home" (click)="clickHandler()" routerLinkActive="active">Acceuil</a>
+			<a routerLink="about" (click)="clickHandler()" routerLinkActive="active">Produit</a>
+      @if (!isTokenExist) {
+        <a (click)="clickHandlerLogin()" routerLinkActive="active">Se connecter</a>
+        <a routerLink="/user/register" (click)="clickHandler()" routerLinkActive="active">Créer un compte</a>
+      }
+      @if (isTokenExist) {
+        <a routerLink="/profil" routerLinkActive="active">Profil</a>
+        <a routerLink="/cart" routerLinkActive="active">Panier</a>
+        <a (click)="logout()" routerLinkActive="active">Se déconnecter</a>
+        }
+			<a routerLink="contact" (click)="clickHandler()" routerLinkActive="active">À propos</a>
 		</nav>
 	</mat-sidenav>
 
@@ -16,12 +23,20 @@
 		<mat-toolbar color="primary">
 			<header>
 				<mat-icon (click)="toggleMenu()">menu</mat-icon>
-				<label>My Shoes</label>        
+        <label for="">My Shoes</label>    
         <nav>
           <a routerLink="/home" routerLinkActive="active">Acceuil</a>
           <a routerLink="about" routerLinkActive="active">Produit</a>
-          <a (click)="openModal()" routerLinkActive="active">Se connecter</a>
-          <a routerLink="sign-up" routerLinkActive="active">Créer un compte</a>
+          @if (!isTokenExist) {
+            <a (click)="openModal()" routerLinkActive="active">Se connecter</a>
+            <a routerLink="/user/register" routerLinkActive="active">Créer un compte</a>
+          }
+          @if (isTokenExist) {
+          <a routerLink="/profil" routerLinkActive="active">Profil</a>
+          <a routerLink="/cart" routerLinkActive="active">Panier</a>
+          <a (click)="logout()" routerLinkActive="active">Se déconnecter</a>
+
+          }
           <a routerLink="contact" routerLinkActive="active">À propos</a>
         </nav>        
       </header>
