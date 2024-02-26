@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -14,11 +15,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -29,11 +32,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ReactiveFormsModule,
     MatSidenavModule,
     FlexLayoutModule,
+    BrowserModule
   ],
   exports: [
     MatButtonModule,
+    BrowserModule,
     MatToolbarModule,
     MatIconModule,
+    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDialogActions,

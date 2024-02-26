@@ -1,0 +1,30 @@
+<h3>Se connecter</h3>
+<section class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput  
+                 formControlName="email"
+                 placeholder="Ex. pat@example.com">
+                 @if (loginForm.get("email")?.hasError && loginForm.get("email")?.touched ) {
+                    <mat-error>Veuillez rentrer un email valide</mat-error>
+                 }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input formControlName="password" type="password" matInput >
+            @if (loginForm.get("password")?.hasError && loginForm.get("password")?.touched ) {
+                <mat-error >Veuillez rentrer un mot de passe valide</mat-error>
+             }
+          </mat-form-field>
+          <div class="button">
+              <button mat-flat-button color="primary">Se connecter</button>
+              <button (click)="closeModal()" mat-flat-button color="primary">Retour</button>
+          </div>
+
+      </form>
+
+      @if (message) {
+        <p class="error">Erreur</p>
+      }
+</section>
