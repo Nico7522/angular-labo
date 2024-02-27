@@ -4,11 +4,12 @@ import { MaterialModule } from './material/material.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from './user-card/user-card.component';
+import { FrenchDatePipe } from '../pipes/french-date.pipe';
 
 @NgModule({
-  declarations: [NavComponent, UserCardComponent],
+  declarations: [NavComponent, UserCardComponent, FrenchDatePipe],
   imports: [MaterialModule, RouterModule, CommonModule],
-  exports: [NavComponent, MaterialModule, UserCardComponent]
+  exports: [NavComponent, MaterialModule, UserCardComponent, FrenchDatePipe]
 
 
 })

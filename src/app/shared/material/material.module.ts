@@ -16,6 +16,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 @NgModule({
@@ -34,7 +36,8 @@ import {MatCardModule} from '@angular/material/card';
     MatExpansionModule,
     FlexLayoutModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
   ],
   exports: [
     MatButtonModule,
@@ -49,7 +52,8 @@ import {MatCardModule} from '@angular/material/card';
     MatExpansionModule,
     FlexLayoutModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   providers: [
       provideAnimationsAsync(),

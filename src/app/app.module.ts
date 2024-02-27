@@ -13,11 +13,13 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
+import { FrenchDatePipe } from './pipes/french-date.pipe';
 
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SnackbarComponent],
   imports: [AppRoutingModule, SharedModule, MaterialModule, HttpClientModule, ReactiveFormsModule, BrowserModule, BrowserAnimationsModule, CommonModule, ExpansionPanelComponent],
+
   providers: [
     provideAnimations()
   ],

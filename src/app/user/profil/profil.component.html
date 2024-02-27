@@ -1,60 +1,92 @@
 <h1>Votre compte</h1>
 @if (!user) {
     <h2>Chargement ...</h2>
-}
-<!-- <app-user-card [user]="user"></app-user-card> -->
-<div class="user"> 
-  
-    <mat-card> 
-        <mat-card-header> 
-            <mat-card-title> 
-                <h2 > 
-                    Infos personnelles
-                    @if (!user.isActive) {
-                        <br>
-                        <span>Vérifier vos mail pour valider votre compte*</span>
+} @else {
+    <div class="user"> 
+      
+        <mat-card> 
+            <mat-card-header> 
+                <mat-card-title> 
+                    <h2 > 
+                        Infos personnelles
+                        @if (!user.isActive) {
+                            <br>
+                            <span>Vérifier vos mail pour valider votre compte*</span>
+        
+                        }
+                    </h2> 
+                </mat-card-title> 
+                <mat-card-subtitle> 
+                    <div class="info-perso">
+                        <p>Nom : {{user.firstName}}</p>
+                        <p>Prénom : {{user.lastName}}</p>
+                        <p>Email : {{user.email}}</p>
+                        <p>Téléphone : {{user.phoneNumber}}</p>
+                        <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                    </div>
+                    <hr>
+                </mat-card-subtitle> 
+            </mat-card-header> 
+            <mat-card-content> 
+                <h3>Adresses</h3>     
     
-                    }
-                </h2> 
-            </mat-card-title> 
-            <mat-card-subtitle> 
-                <div class="info-perso">
-                    <p>Nom : {{user.firstName}}</p>
-                    <p>Prénom : {{user.lastName}}</p>
-                    <p>Email : {{user.email}}</p>
-                    <p>Téléphone : {{user.phoneNumber}}</p>
+                @if (user.adresses.length <= 0) {
+                    <p>Aucune</p>
                     <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
-                </div>
-                <hr>
-            </mat-card-subtitle> 
-        </mat-card-header> 
-        <mat-card-content> 
-            <h3>Adresses</h3>
-
-            @if (user.adresses.length <= 0) {
-                <p>Aucune</p>
-                <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
-
-            } @else {
-                <mat-list>
-                @for (adress of user.adresses; track $index) {
-                    <mat-list-item>
-                        <mat-icon class="adress-icon" matListItemIcon>house</mat-icon>
-                        <div matListItemTitle>{{adress.cityName}}</div>
-                        <div matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}</div>
-                      </mat-list-item>
+    
+                } @else {
+                    <mat-list>
+                    @for (adress of user.adresses; track $index) {
+                        <mat-list-item routerLink="/user/adress/{{adress.adressId}}">
+                            <div matListItemTitle>{{adress.cityName}}</div>
+                            <div matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}</div>
+                          </mat-list-item>
+                        }
+                    </mat-list>
+                    <button mat-icon-button><mat-icon>add_box</mat-icon></button>
+                    <hr>
+                }
+                <h3>Vos commandes</h3>
+                <button (click)="getOrders()" mat-raised-button color="primary">{{orderDisplay ? "Masquer" : "Afficher"}}</button>
+                @if (orderDisplay) {
+                    @if (!order && orderDisplay) {
+                        <p>Aucune commande</p>
+        
+                    } @else {
+                        <mat-list>
+                        @for (order of order; track $index) {
+                            <mat-list-item>
+                                <mat-icon matListItemIcon>shopping_cart</mat-icon>
+                                <div matListItemTitle>Prix total : {{order.totalPrice | currency: 'EUR'}}</div>
+                                <div matListItemLine>{{order.orderDate | frenchDate}}</div>
+                            </mat-list-item>
+                            <h4>Les produits</h4>
+                            <table mat-table class="mat-elevation-z8" [dataSource]="order.orderedProducts">
+                                <ng-container matColumnDef="quantity">
+                                    <th mat-header-cell *matHeaderCellDef>Quantité</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="modelName">
+                                    <th mat-header-cell *matHeaderCellDef>Modèle</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.modelName}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="price">
+                                    <th mat-header-cell *matHeaderCellDef>Prix</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                                  </ng-container>
+                                  
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                            }
+                        </mat-list>
                     }
-                </mat-list>
-                <button mat-icon-button><mat-icon>add_box</mat-icon></button>
-                <hr>
 
 
-            }
-            <h3>Commandes</h3>
-                <p>Aucune</p>
-                <button mat-icon-button><mat-icon>add_box</mat-icon></button>
+                }
+            </mat-card-content> 
+       
+        </mat-card> 
+    </div>
 
-        </mat-card-content> 
-   
-    </mat-card> 
-</div>
+}
