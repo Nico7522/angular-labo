@@ -4,6 +4,8 @@ import { User, UserInfo } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { UserService } from '../../services/user.service';
+import { api } from '../../../../environement/environement';
+
 
 @Component({
   selector: 'app-profil',
@@ -16,6 +18,7 @@ export class ProfilComponent implements OnInit {
   order!: Order[];
   orderDisplay: boolean = false;
   panelOpenState = false;
+  imageUrl: string = api.img_url;
   constructor(
     private _tokenService: TokenService,
     private _userService: UserService
@@ -41,6 +44,6 @@ export class ProfilComponent implements OnInit {
       
     }
   }
-  displayedColumns: string[] = ['quantity', 'modelName', 'price'];
+  
 
 }

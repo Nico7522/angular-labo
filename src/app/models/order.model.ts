@@ -17,4 +17,5 @@ export interface Order {
     quantity: number;
     reductionPerProduct: number;
     size: Size;
+    imgUrl: string
   }
