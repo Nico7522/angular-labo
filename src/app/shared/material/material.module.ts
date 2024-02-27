@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -15,7 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [],
   imports: [
@@ -29,7 +31,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatDialogContent,
     ReactiveFormsModule,
     MatSidenavModule,
+    MatExpansionModule,
     FlexLayoutModule,
+    MatCardModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -41,10 +46,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatDialogContent,
     ReactiveFormsModule,
     MatSidenavModule,
+    MatExpansionModule,
     FlexLayoutModule,
+    MatCardModule,
+    MatListModule
   ],
   providers: [
-    provideAnimationsAsync(),
+      provideAnimationsAsync(),
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { autoFocus: true }, },
   ],
 })

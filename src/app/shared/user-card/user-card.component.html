@@ -1,0 +1,35 @@
+<div class="user"> 
+  
+    <mat-card> 
+        <mat-card-header> 
+            <mat-card-title> 
+                <h2 > 
+                    Infos personnelles
+                </h2> 
+            </mat-card-title> 
+            <mat-card-subtitle> 
+                <div class="info-perso">
+                    <p>Nom : {{user.firstName}}</p>
+                    <p>Prénom : {{user.lastName}}</p>
+                    <p>Email : {{user.email}}</p>
+                    <p>Téléphone : {{user.phoneNumber}}</p>
+                    <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                </div>
+                <hr>
+            </mat-card-subtitle> 
+        </mat-card-header> 
+        <mat-card-content> 
+            <h3>Adresses</h3>
+
+            @if (user.adresses.length <= 0) {
+                <p>Aucune</p>
+            }
+            <h3>Commandes</h3>
+            @if (user.adresses.length <= 0) {
+                <p>Aucune</p>
+            }
+  
+        </mat-card-content> 
+   
+    </mat-card> 
+</div>

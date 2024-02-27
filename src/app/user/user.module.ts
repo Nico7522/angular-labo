@@ -6,6 +6,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MaterialModule } from '../shared/material/material.module';
+import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { ExpansionPanelComponent } from '../components/expansion-panel/expansion-panel.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -13,11 +17,16 @@ import { MaterialModule } from '../shared/material/material.module';
     UserComponent,
     LoginComponent,
     RegisterComponent,
-    ProfilComponent
+    ProfilComponent,
+
   ],
   imports: [
     UserRoutingModule,
+    SharedModule,
     MaterialModule,
-  ]
+    ExpansionPanelComponent
+  ],
+
+
 })
 export class UserModule { }

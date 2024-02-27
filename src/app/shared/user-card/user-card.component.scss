@@ -4,20 +4,13 @@
 
 }
 
-
 .info-perso {
     margin-top: 15px;
-}
-
-.adress-icon {
-    transform: scale(1.5);
-    padding-top: 9px;
 }
 mat-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
 }
 
 mat-card-subtitle {
@@ -29,18 +22,6 @@ mat-card-subtitle > p, button {
 }
 
 
-h3, h2, p {
+h3, p {
     text-align: center;
-}
-
-span {
-    color: red;
-    font-size: 0.5em;
-    text-align: center;
-}
-
-.adress {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

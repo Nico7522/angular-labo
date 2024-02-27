@@ -15,13 +15,15 @@ export class ProfilComponent implements OnInit {
   constructor(private _tokenService: TokenService, private _userService: UserService){}
   ngOnInit(): void {
     this.userId = this._tokenService.decodeToken().id;
+    console.log(this.userId);
+    
     this._userService.GetById(this.userId).subscribe({
-      next: (user) => console.log(user),
+      next: (user) => this.user = user,
       error: (err) => console.log(err)
       
       
     })
   }
-
+  panelOpenState=  false;
 
 }

@@ -1,1 +1,60 @@
-<p>profil works!</p>
+<h1>Votre compte</h1>
+@if (!user) {
+    <h2>Chargement ...</h2>
+}
+<!-- <app-user-card [user]="user"></app-user-card> -->
+<div class="user"> 
+  
+    <mat-card> 
+        <mat-card-header> 
+            <mat-card-title> 
+                <h2 > 
+                    Infos personnelles
+                    @if (!user.isActive) {
+                        <br>
+                        <span>Vérifier vos mail pour valider votre compte*</span>
+    
+                    }
+                </h2> 
+            </mat-card-title> 
+            <mat-card-subtitle> 
+                <div class="info-perso">
+                    <p>Nom : {{user.firstName}}</p>
+                    <p>Prénom : {{user.lastName}}</p>
+                    <p>Email : {{user.email}}</p>
+                    <p>Téléphone : {{user.phoneNumber}}</p>
+                    <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                </div>
+                <hr>
+            </mat-card-subtitle> 
+        </mat-card-header> 
+        <mat-card-content> 
+            <h3>Adresses</h3>
+
+            @if (user.adresses.length <= 0) {
+                <p>Aucune</p>
+                <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+
+            } @else {
+                <mat-list>
+                @for (adress of user.adresses; track $index) {
+                    <mat-list-item>
+                        <mat-icon class="adress-icon" matListItemIcon>house</mat-icon>
+                        <div matListItemTitle>{{adress.cityName}}</div>
+                        <div matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}</div>
+                      </mat-list-item>
+                    }
+                </mat-list>
+                <button mat-icon-button><mat-icon>add_box</mat-icon></button>
+                <hr>
+
+
+            }
+            <h3>Commandes</h3>
+                <p>Aucune</p>
+                <button mat-icon-button><mat-icon>add_box</mat-icon></button>
+
+        </mat-card-content> 
+   
+    </mat-card> 
+</div>

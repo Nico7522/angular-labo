@@ -1,3 +1,5 @@
+import { Adress } from "./adress.model";
+
 export interface UserInfo {
     id: number;
     fullName: string;
@@ -13,5 +15,5 @@ export interface User {
     phoneNumber: number,
     role: string,
     isActive: boolean,
-    adresses: any[]
+    adresses: Adress[]
 }
