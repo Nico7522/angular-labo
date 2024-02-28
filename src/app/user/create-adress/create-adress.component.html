@@ -1,0 +1,49 @@
+<h3>Ajouter une adresse</h3>
+<section class="adress-form">
+    <form [formGroup]="adressForm" (ngSubmit)="handleSubmit()" >
+
+        <mat-form-field>
+            <mat-label>Ville</mat-label>
+            <input formControlName="cityName" type="text" matInput >
+            @if (adressForm.get("cityName")?.invalid) {
+                <mat-error >Champ requis*</mat-error>
+             }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Rue</mat-label>
+            <input formControlName="street" type="text" matInput >
+            @if (adressForm.get("street")?.invalid) {
+                <mat-error >champ requis*</mat-error>
+             }
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Numéro</mat-label>
+            <input formControlName="number" type="number" matInput >
+            @if (adressForm.get("number")?.invalid) {
+                <mat-error >Champ requis*</mat-error>
+             }
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Pays</mat-label>
+            <input type="text" matInput formControlName="country" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (option of filteredOptions | async; track option) {
+                <mat-option [value]="option">{{option}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+       
+          <div class="button">
+              <button mat-flat-button color="primary">Ajouter</button>
+              <button (click)="closeModal()" mat-flat-button color="primary">Retour</button>
+
+          </div>
+
+      </form>
+
+      <!-- @if (message) {
+        <p [class]="message === 'Erreur' ? 'error' : 'success'">{{message}}</p>
+      } -->
+</section>

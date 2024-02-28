@@ -17,47 +17,38 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatExpansionModule} from '@angular/material/expansion';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+const material = [
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDialogActions,
+  MatDialogContent,
+  MatSidenavModule,
+  MatExpansionModule,
+  FlexLayoutModule,
+  MatCardModule,
+  MatListModule,
+  MatTableModule,
+  MatAutocompleteModule
+]
+
 @NgModule({
-  declarations: [],
   imports: [
-    CommonModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogActions,
-    MatDialogContent,
-    ReactiveFormsModule,
-    MatSidenavModule,
-    MatExpansionModule,
-    FlexLayoutModule,
-    MatCardModule,
-    MatListModule,
-    MatTableModule,
+   material
   ],
   exports: [
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogActions,
-    MatDialogContent,
-    ReactiveFormsModule,
-    MatSidenavModule,
-    MatExpansionModule,
-    FlexLayoutModule,
-    MatCardModule,
-    MatListModule,
-    MatTableModule
+    material
   ],
-  providers: [
-      provideAnimationsAsync(),
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { autoFocus: true }, },
-  ],
+  // providers: [
+    
+  //     provideAnimationsAsync(),
+  //   { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { autoFocus: true }, },
+  // ],
 })
 export class MaterialModule {}

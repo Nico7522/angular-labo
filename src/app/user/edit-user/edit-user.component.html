@@ -1,0 +1,54 @@
+<h3>Modifier le compte</h3>
+<section class="register-form">
+    <form [formGroup]="editFrom" (ngSubmit)="handleSubmitEdit()">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input type="text" matInput  
+                 formControlName="firstName"
+                >
+                 @if (editFrom.get("firstName")?.invalid) {
+                    <mat-error>Champ requis*</mat-error>
+                 }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input formControlName="lastName" type="text" matInput >
+            @if (editFrom.get("lastName")?.invalid) {
+                <mat-error >Champ requis*</mat-error>
+             }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Numéro de téléphone</mat-label>
+            <input formControlName="phoneNumber" type="text" matInput >
+            @if (editFrom.get("phoneNumber")?.invalid) {
+                <mat-error >Numéro invalide*</mat-error>
+             }
+          </mat-form-field>
+
+
+
+          <div class="button">
+              <button mat-flat-button color="primary">Modifier</button>
+          </div>
+
+      </form>
+
+      <!-- <div class="mail-form">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input [formControl]="userEmail" type="text" matInput >
+            @if (userEmail.invalid) {
+                <mat-error >Email invalide*</mat-error>
+             }
+          </mat-form-field>
+          <div class="button">
+            <button (click)="handleSubmitMail()" mat-flat-button color="primary">Modifier l'email</button>
+        </div>
+
+      </div> -->
+
+      @if (message) {
+        <p [class]="message === 'Une erreur s\'est produite.' ? 'error' : 'success'">{{message}}</p>
+      }
+</section>

@@ -17,3 +17,14 @@ export interface User {
     isActive: boolean,
     adresses: Adress[]
 }
+
+export interface EditUserForm {
+    firstName: string,
+    lastName: string,
+    phoneNumber: number,
+}
+
+export interface EditMailForm {
+    email: string,
+
+}

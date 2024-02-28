@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         next: (token) => {
           console.log(token)
           this.closeModal();
-          this.openSnackBar()
+          this._openSnackBar()
         },
         error: (err) => console.log(err)
         
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this._modalService.closeModal();
   }
 
-  openSnackBar() {
+  private _openSnackBar() {
     this._snackBar.openFromComponent(SnackbarComponent, {
       duration: 1000,
       data: "Connecté"

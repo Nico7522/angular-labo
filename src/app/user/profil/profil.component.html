@@ -1,88 +1,68 @@
 <h1>Votre compte</h1>
-@if (!user) {
-    <h2>Chargement ...</h2>
+@if (loading) {
+<h2>Chargement ...</h2>
 } @else {
-    <div class="user"> 
-      
-        <mat-card> 
-            <mat-card-header> 
-                <mat-card-title> 
-                    <h2 > 
-                        Infos personnelles
-                        @if (!user.isActive) {
-                            <br>
-                            <span>Vérifier vos mail pour valider votre compte*</span>
-        
-                        }
-                    </h2> 
-                </mat-card-title> 
-                <mat-card-subtitle> 
-                    <div class="info-perso">
-                        <p>Nom : {{user.firstName}}</p>
-                        <p>Prénom : {{user.lastName}}</p>
-                        <p>Email : {{user.email}}</p>
-                        <p>Téléphone : {{user.phoneNumber}}</p>
-                        <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
-                    </div>
-                    <hr>
-                </mat-card-subtitle> 
-            </mat-card-header> 
-            <mat-card-content> 
-                <h3>Adresses</h3>     
-    
-                @if (user.adresses.length <= 0) {
-                    <p>Aucune</p>
-                    <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
-    
+<div class="user">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h2>
+                    Infos personnelles
+                    @if (!user.isActive) {
+                    <br>
+                    <span>Vérifier vos mail pour valider votre compte*</span>
+
+                    }
+                </h2>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <div class="info-perso">
+                    <p>Nom : {{user.firstName}}</p>
+                    <p>Prénom : {{user.lastName}}</p>
+                    <p>Email : {{user.email}}</p>
+                    <p>Téléphone : {{user.phoneNumber}}</p>
+                    <button routerLink="/user/edit/{{user.userId}}"
+                        mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                </div>
+                <hr>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <h3>Adresses</h3>
+
+            @if (user.adresses.length <= 0) { <p>Aucune</p>
+                <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+
                 } @else {
-                    <mat-list>
+                <mat-list>
                     @for (adress of user.adresses; track $index) {
-                        <mat-list-item routerLink="/user/adress/{{adress.adressId}}">
-                            <div matListItemTitle>{{adress.cityName}}</div>
-                            <div matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}</div>
-                          </mat-list-item>
-                        }
-                    </mat-list>
-                    <button mat-icon-button><mat-icon>add_box</mat-icon></button>
-                    <hr>
+                    <mat-list-item routerLink="/user/adress/{{adress.adressId}}">
+                        <div matListItemTitle>{{adress.cityName}}</div>
+                        <div matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}</div>
+                    </mat-list-item>
+                    }
+                </mat-list>
+                <button (click)="openModal()" mat-icon-button><mat-icon>add_box</mat-icon></button>
+                <hr>
                 }
                 <h3>Vos commandes</h3>
-                <button (click)="getOrders()" mat-raised-button color="primary">{{orderDisplay ? "Masquer" : "Afficher"}}</button>
+                <button (click)="getOrders()" mat-raised-button color="primary">{{orderDisplay ? "Masquer" :
+                    "Afficher"}}</button>
                 @if (orderDisplay) {
-                    @if (!order && orderDisplay) {
-                        <p>Aucune commande</p>
-        
-                    } @else {
-                        <mat-list>
-                        @for (order of order; track $index) {
-                            <mat-list-item>
-                                <mat-icon matListItemIcon>shopping_cart</mat-icon>
-                                <div matListItemTitle>Prix total : {{order.totalPrice | currency: 'EUR'}}</div>
-                                <div matListItemLine>{{order.orderDate | frenchDate}}</div>
-                            </mat-list-item>
-                            <h4>Les produits</h4>
-                            @for (product of order.orderedProducts; track $index) {
-                                <div class="product-display">
-                                    <img style="height: 50px;" [src]="imageUrl + '/' + product.imgUrl" alt="">
-                                    <mat-list-item>
-                                        <!-- <mat-icon matListItemIcon>folder</mat-icon> -->
-                                        <div matListItemTitle>{{product.productName}}</div>
-                                        <div matListItemLine>{{product.quantity}} X | {{product.price | currency: 'EUR'}}</div>
-                                      </mat-list-item>
-
-                                </div>
-
-
-                            }
-                            }
-                        </mat-list>
+                @if (!order && orderDisplay) {
+                <p>Aucune commande</p>
+                } @else {
+                <mat-list>
+                    @for (order of order; track $index) {
+                    <app-expansion [order]="order"></app-expansion>
+                    <br>
                     }
-
-
+                </mat-list>
                 }
-            </mat-card-content> 
-       
-        </mat-card> 
-    </div>
+                }
+        </mat-card-content>
+
+    </mat-card>
+</div>
 
 }

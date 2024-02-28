@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterForm } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
+import { phoneNumberValidator } from '../../utils/validators';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registerForm = this._formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required, this.phoneNumberValidator()]],
+      phoneNumber: ['', [Validators.required, phoneNumberValidator()]],
       email: [
         '',
         [
@@ -74,12 +75,5 @@ export class RegisterComponent implements OnInit, OnDestroy {
   closeModal() {
     this._modalService.closeModal();
   }
-  phoneNumberValidator(): ValidatorFn | null {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value != null && (control.value.length < 9 || control.value.length > 9)) {
-        return { message: 'invalid' };
-      }
-      return null;
-    };
-  }
+
 }

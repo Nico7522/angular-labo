@@ -1,0 +1,28 @@
+<mat-expansion-panel>
+
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon matListItemIcon>shopping_cart</mat-icon>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{order.orderDate | frenchDate}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  @for (product of order.orderedProducts; track $index) {
+  <div class="product-display">
+
+    <img style="height: 50px;" [src]="imageUrl + '/' + product.imgUrl" alt="">
+    <mat-list-item>
+      <div matListItemTitle>{{product.productName}}</div>
+      <div matListItemLine>{{product.quantity}} X | {{product.price | currency: 'EUR'}}</div>
+    </mat-list-item>
+
+  </div>
+  }
+  <mat-list-item>
+
+    <div matListItemTitle>Prix total : {{order.totalPrice | currency: 'EUR'}}</div>
+
+  </mat-list-item>
+</mat-expansion-panel>

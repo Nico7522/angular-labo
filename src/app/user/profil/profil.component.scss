@@ -20,17 +20,19 @@ mat-card {
     text-align: center;
 }
 
-mat-list-item:hover {
-    cursor: pointer;
-    border: 1px solid black;
-}
+
 
 mat-card-subtitle {
     text-align: center;
 }
 
-mat-card-subtitle > p, button {
-    // margin-top: -10px;
+mat-card-content {
+    // width: 70%;
+   
+}
+
+.order {
+    border: solid 1px black
 }
 
 
