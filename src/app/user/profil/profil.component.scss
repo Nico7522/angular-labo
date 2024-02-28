@@ -13,6 +13,9 @@
     transform: scale(1.5);
     padding-top: 9px;
 }
+
+
+
 mat-card {
     display: flex;
     align-items: center;
@@ -26,9 +29,11 @@ mat-card-subtitle {
     text-align: center;
 }
 
-mat-card-content {
-    // width: 70%;
-   
+.adress-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 40px;
 }
 
 .order {

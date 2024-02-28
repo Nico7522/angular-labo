@@ -38,7 +38,11 @@
                     @for (adress of user.adresses; track $index) {
                     <mat-list-item routerLink="/user/adress/{{adress.adressId}}">
                         <div matListItemTitle>{{adress.cityName}}</div>
-                        <div matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}</div>
+                            <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                            <div class="adress-display" matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}} <button mat-icon-button><mat-icon>mode_edit</mat-icon></button> </div>
+
+                
+
                     </mat-list-item>
                     }
                 </mat-list>
