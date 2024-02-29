@@ -31,15 +31,19 @@
             <h3>Adresses</h3>
 
             @if (user.adresses.length <= 0) { <p>Aucune</p>
-                <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                <button (click)="openModal()" mat-icon-button><mat-icon>add_box</mat-icon></button>
+
 
                 } @else {
                 <mat-list>
                     @for (adress of user.adresses; track $index) {
-                    <mat-list-item routerLink="/user/adress/{{adress.adressId}}">
+                    <mat-list-item>
                         <div matListItemTitle>{{adress.cityName}}</div>
                             <button mat-icon-button><mat-icon>mode_edit</mat-icon></button>
-                            <div class="adress-display" matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}} <button mat-icon-button><mat-icon>mode_edit</mat-icon></button> </div>
+                            <div class="adress-display" matListItemLine>{{adress.number}} {{adress.street}} {{adress.country}}
+                                 <button routerLink="/user/edit/adress/{{adress.adressId}}" mat-icon-button><mat-icon>mode_edit</mat-icon></button>
+                                 <button (click)="delete(adress.adressId)" class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
+                            </div>
 
                 
 

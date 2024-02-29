@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject, map, Observable, startWith, Subject } from 'rxjs';
+import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
-import { AdressForm } from '../../models/adress.model';
-import { AdressService } from '../../services/adress.service';
+import { AddressForm } from '../../models/adress.model';
+import { AddressService } from '../../services/adress.service';
 import { ModalService } from '../../services/modal.service';
 import { TokenService } from '../../services/token.service';
 import { countries } from '../../utils/auto-complete'
@@ -14,17 +14,17 @@ import { countries } from '../../utils/auto-complete'
   styleUrl: './create-adress.component.scss'
 })
 export class CreateAdressComponent implements OnInit {
-  adressForm!: FormGroup;
+  addressForm!: FormGroup;
   countries: string[] = countries;
-  constructor(private _formBuilder: FormBuilder, private _modalService: ModalService, private _tokenService: TokenService, private _adressService: AdressService, private _snackBar: MatSnackBar){}
+  constructor(private _formBuilder: FormBuilder, private _modalService: ModalService, private _tokenService: TokenService, private _addressService: AddressService, private _snackBar: MatSnackBar){}
   ngOnInit(): void {
-    this.adressForm = this._formBuilder.group({
+    this.addressForm = this._formBuilder.group({
       cityName: ['', Validators.required],
       country: ['', Validators.required],
       number: ['', Validators.required],
       street: ['', Validators.required],
     });
-    this.filteredOptions = this.adressForm.get("country")!.valueChanges.pipe(
+    this.filteredOptions = this.addressForm.get("country")!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
@@ -37,11 +37,11 @@ export class CreateAdressComponent implements OnInit {
   }
 
   handleSubmit() {
-    if(this.adressForm.valid) {
+    if(this.addressForm.valid) {
     
       const userId: number = this._tokenService.decodeToken().id;
       
-      this._adressService.create(this.adressForm.value, userId).subscribe({
+      this._addressService.create(this.addressForm.value, userId).subscribe({
         next: () => {this.closeModal(), this._openSnackBar()},
         error: () => {}
       });

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { api } from '../../../environement/environement'
@@ -35,5 +35,12 @@ export class AuthService {
           return res;
         })
       );
+  }
+
+  editEmail(email: string, userId: number) : Observable<any> {
+
+    
+    return this._httpClient.patch(`${api.url}/auth/${userId}/update/email`,  {email}, {responseType: 'text'})
+
   }
 }

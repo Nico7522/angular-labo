@@ -1,0 +1,48 @@
+<h1>Modifier l'adresse</h1>
+<section class="adress-form">
+    <form [formGroup]="editAddressForm" (ngSubmit)="handleSubmit()">
+
+        <mat-form-field>
+            <mat-label>Ville</mat-label>
+            <input formControlName="cityName" type="text" matInput>
+            @if (editAddressForm.get("cityName")?.invalid) {
+            <mat-error>Champ requis*</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Rue</mat-label>
+            <input formControlName="street" type="text" matInput>
+            @if (editAddressForm.get("street")?.invalid) {
+            <mat-error>champ requis*</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Numéro</mat-label>
+            <input formControlName="number" type="number" matInput>
+            @if (editAddressForm.get("number")?.invalid) {
+            <mat-error>Champ requis*</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Pays</mat-label>
+            <input type="text" matInput formControlName="country" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                @for (option of filteredOptions | async; track option) {
+                <mat-option [value]="option">{{option}}</mat-option>
+                }
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="button">
+            <button mat-flat-button color="primary">Modifier</button>
+        </div>
+            
+        </form>
+  
+
+      @if (errorMessage) {
+        <p class="error">{{errorMessage}}</p>
+      }
+</section>

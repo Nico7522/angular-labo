@@ -1,4 +1,4 @@
-export interface Adress {
+export interface Address {
     adressId: number;
     cityName: string;
     country: string;
@@ -6,7 +6,7 @@ export interface Adress {
     street: string;
   }
   
-  export interface AdressForm {
+  export interface AddressForm {
     cityName: string;
     country: string;
     number: number;

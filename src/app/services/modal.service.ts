@@ -1,6 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +9,31 @@ import { MatDialog } from '@angular/material/dialog';
 export class ModalService {
 
    constructor(private _dialog: MatDialog) {}
+ 
+    private _$canDeleteAddress = new Subject<boolean>();
+    $canDeleteAddress = this._$canDeleteAddress.asObservable();
+    canDelete(canDelete: boolean) {
+      this._$canDeleteAddress.next(canDelete);
+      this.closeModal();
+    }
 
-  openModal(component: ComponentType<unknown> ,enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this._dialog.open(component, {
-      width: '300px',
-      height: '350px',
+
+    openModal(component: ComponentType<unknown> ,enterAnimationDuration: string, exitAnimationDuration: string, width: string = "300px", height: string = "350px"): void {
+      this._dialog.open(component, {
+      width: width,
+      height: height,
       hasBackdrop: false,
       enterAnimationDuration,
       exitAnimationDuration,
     });
+
+   
+   
+
+  
   }
   closeModal(){
     this._dialog.closeAll();
+    
   }
 }

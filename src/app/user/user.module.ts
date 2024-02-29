@@ -9,11 +9,12 @@ import { MaterialModule } from '../shared/material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 
-import { AdressDetailsComponent } from './adress-details/adress-details.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateAdressComponent } from './create-adress/create-adress.component';
+import { EditAddressComponent } from './edit-address/edit-address.component';
+import { ConfirmAddressDeleteComponent } from './profil/confirm-address-delete/confirm-address-delete.component';
 
 
 @NgModule({
@@ -22,10 +23,11 @@ import { CreateAdressComponent } from './create-adress/create-adress.component';
         LoginComponent,
         RegisterComponent,
         ProfilComponent,
-        AdressDetailsComponent,
         OrderDetailsComponent,
         EditUserComponent,
         CreateAdressComponent,
+        EditAddressComponent,
+        ConfirmAddressDeleteComponent,
     ],
     imports: [
         UserRoutingModule,

@@ -8,6 +8,9 @@ import { api } from '../../../../environement/environement';
 import { Subscription } from 'rxjs';
 import { ModalService } from '../../services/modal.service';
 import { CreateAdressComponent } from '../create-adress/create-adress.component';
+import { SnackbarService } from '../../services/snackbar.service';
+import { AddressService } from '../../services/adress.service';
+import { ConfirmAddressDeleteComponent } from './confirm-address-delete/confirm-address-delete.component';
 
 
 @Component({
@@ -18,6 +21,7 @@ import { CreateAdressComponent } from '../create-adress/create-adress.component'
 export class ProfilComponent implements OnInit, OnDestroy {
   userId!: number;
   user!: User;
+  canDelete: boolean = false;
   loading: boolean = true;
   order!: Order[];
   orderDisplay: boolean = false;
@@ -25,10 +29,13 @@ export class ProfilComponent implements OnInit, OnDestroy {
   userSub!: Subscription;
   orderSub!: Subscription;
   imageUrl: string = api.img_url;
+
   constructor(
     private _tokenService: TokenService,
     private _userService: UserService,
-    private _modalService: ModalService
+    private _modalService: ModalService,
+    private _snackbarService: SnackbarService,
+    private _addressService: AddressService
   ) {}
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
@@ -54,8 +61,8 @@ export class ProfilComponent implements OnInit, OnDestroy {
     });
   }
 
-  openModal(){
-    this._modalService.openModal(CreateAdressComponent, '300ms', '300ms')
+  openModal() {
+    this._modalService.openModal(CreateAdressComponent, '300ms', '300ms');
   }
 
   getOrders() {
@@ -67,5 +74,26 @@ export class ProfilComponent implements OnInit, OnDestroy {
         next: (orders) => (this.order = orders),
       });
     }
+  }
+
+  delete(addressId: number) {
+    this._modalService.openModal(
+      ConfirmAddressDeleteComponent,
+      '0ms',
+      '0ms',
+      '350px',
+      '200px'
+    );
+    this._modalService.$canDeleteAddress.subscribe({
+      next: (canDelete) => {
+        if (canDelete) {
+          this._addressService.delete(addressId).subscribe({
+            next: () => {
+              this._snackbarService.openSnackBar('Adresse supprimée !');
+            },
+          });
+        }
+      },
+    });
   }
 }
