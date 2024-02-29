@@ -4,16 +4,21 @@ import { CommonModule } from '@angular/common';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product.component';
 import { MaterialModule } from '../shared/material/material.module';
+import { DiscountPipe } from '../pipes/discount.pipe';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 @NgModule({
   declarations: [
-    ProductComponent
+    ProductComponent,
+    DiscountPipe,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
     ProductRoutingModule,
-    MaterialModule
+    MaterialModule,
+    
   ]
 })
 export class ProductModule { }

@@ -20,6 +20,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const material = [
   MatButtonModule,
@@ -36,7 +37,8 @@ const material = [
   MatListModule,
   MatTableModule,
   MatAutocompleteModule,
-  MatGridListModule
+  MatGridListModule,
+  MatTabsModule
 ]
 
 @NgModule({

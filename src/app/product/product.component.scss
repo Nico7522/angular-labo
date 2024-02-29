@@ -1,8 +1,31 @@
+
 .example-card {
     max-width: 400px;
   }
+
+  h1 {
+    font-family: title;
+    font-size: 3em;
+  }
   
-  .example-header-image {
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    margin: auto;
+  }
+
+  .nike {
     background-image: url('../../assets/nike.jpg');
     background-size: cover;
+  }
+
+  .Puma {
+    background-image: url('../../assets/puma.jpg');
+    background-size: cover;
+  }
+
+  .discount {
+    color: red
   }

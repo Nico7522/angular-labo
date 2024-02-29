@@ -9,10 +9,14 @@ import { Response } from '../models/response.model'
 })
 export class ProductService {
 
-  constructor(private _hhtpClient: HttpClient) { }
+  constructor(private _htpClient: HttpClient) { }
 
   getProducts(offset : number): Observable<Response<Product[]>> {
-    return this._hhtpClient.get<Response<Product[]>>(`${api.url}/product/paginate?offset?=${offset}`)
+    return this._htpClient.get<Response<Product[]>>(`${api.url}/product/paginate?offset=${offset}`)
+  }
+
+  getById(productId: number): Observable<Response<Product>> {
+    return this._htpClient.get<Response<Product>>(`${api.url}/product/${productId}`)
   }
 
 

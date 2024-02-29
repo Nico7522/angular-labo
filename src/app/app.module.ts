@@ -11,13 +11,12 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { tokenInterceptor } from './interceptors/token.interceptor';
-import { UserModule } from './user/user.module';
+import { DiscountPipe } from './pipes/discount.pipe';
 
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SnackbarComponent],
   imports: [AppRoutingModule, SharedModule, MaterialModule, HttpClientModule, ReactiveFormsModule, BrowserModule, BrowserAnimationsModule, CommonModule],
-
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: tokenInterceptor, multi: true },
     provideAnimations(),

@@ -1,24 +1,28 @@
 <h1>Tous les produits</h1>
 <mat-grid-list [cols]="mybreakpoint" rowHeight="700px">
   @for (product of products; track $index) {
-    <mat-grid-tile><mat-card class="example-card">
+  <mat-grid-tile><mat-card class="example-card">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar [class]="product.brand"></div>
         <mat-card-title>{{product.modelName}}</mat-card-title>
         <mat-card-subtitle>{{product.brand | uppercase}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image height="450px"  [src]="imageUrl + '/' + product.image" alt="Photo of a Shiba Inu">
+      <img mat-card-image height="450px" [src]="imageUrl + '/' + product.image" alt="photo du produit">
       <mat-card-content>
         <p>{{product.description}}</p>
-        <p>{{product.price | currency}}</p>
+        <p>{{product.price | currency: 'EUR'}}</p>
+        @if (product.discount > 0) {
+          <p class="discount">-{{product.discount | discount}}%</p>
+        }
 
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Détails</button>
+        <button routerLink="/products/details/{{product.productId}}" mat-button>Détails</button>
         <button mat-button>Ajouter au panier</button>
       </mat-card-actions>
     </mat-card>
-    </mat-grid-tile>
+  </mat-grid-tile>
 
   }
- 
+</mat-grid-list>
+<button class="btn" mat-raised-button (click)="addMore()">Voir plus</button>
