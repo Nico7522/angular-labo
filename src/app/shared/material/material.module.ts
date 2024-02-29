@@ -13,14 +13,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 const material = [
   MatButtonModule,
   MatToolbarModule,
@@ -35,7 +35,8 @@ const material = [
   MatCardModule,
   MatListModule,
   MatTableModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatGridListModule
 ]
 
 @NgModule({
