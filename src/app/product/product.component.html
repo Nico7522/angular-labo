@@ -10,10 +10,16 @@
       <img mat-card-image height="450px" [src]="imageUrl + '/' + product.image" alt="photo du produit">
       <mat-card-content>
         <p>{{product.description}}</p>
-        <p>{{product.price | currency: 'EUR'}}</p>
-        @if (product.discount > 0) {
-          <p class="discount">-{{product.discount | discount}}%</p>
-        }
+        <div class="price-section">
+          <p [class]="product.discount > 0 ? 'on-discount' : ''">{{product.price | currency: 'EUR'}}  
+          </p>
+          @if (product.discount > 0) {
+            <p class="discount">    -{{product.discount | discount}}%</p>
+            <p>{{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
+          }
+          
+
+        </div>
 
       </mat-card-content>
       <mat-card-actions>
