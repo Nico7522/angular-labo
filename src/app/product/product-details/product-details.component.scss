@@ -14,3 +14,14 @@ mat-tab-group {
 mat-tab {
     text-align: center !important;
 }
+
+.mat-mdc-tab-body-content {
+    
+    overflow: hidden !important;
+}
+
+mat-radio-group {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}

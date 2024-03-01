@@ -17,6 +17,8 @@
             <p class="discount">-{{product.discount | discount}}%</p>
             <p> {{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
           }
+          <button (click)="addToCart()" mat-raised-button>Ajouter au panier</button>
+
 
           <mat-tab-group>
             <mat-tab label="Catégories">
@@ -32,9 +34,11 @@
             </mat-tab>
             <mat-tab label="Tailles disponibles">
                 @if (product.sizes.length > 0) {
-                    @for (size of product.sizes; track $index) {
-                        <p>Taille {{size.size}} | Stock : {{size.stock}}</p>
-                    }
+                    <mat-radio-group (change)="handleSize($event)" aria-label="Select an option">
+                    @for (size of product.sizes; track size.sizeId) {
+                            <mat-radio-button [value]="size.sizeId">{{size.size}}</mat-radio-button>
+                        }
+                    </mat-radio-group>
 
                 } @else {
                     <p>Aucune taille disponible</p>

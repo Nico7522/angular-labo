@@ -32,6 +32,8 @@
 </mat-sidenav-content>
 </mat-sidenav-container> -->
 
-
+@if (isCartVisible) {
+	<app-cart></app-cart>
+}
 <app-nav></app-nav>
 <router-outlet></router-outlet>

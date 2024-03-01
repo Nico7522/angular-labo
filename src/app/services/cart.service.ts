@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CartOrder, CartProduct } from '../models/cart.model';
 import { TokenService } from './token.service';
 import { api } from '../../../environement/environement'
@@ -8,7 +8,8 @@ import { api } from '../../../environement/environement'
   providedIn: 'root'
 })
 export class CartService {
-
+  private _$isCartVisible = new Subject<boolean>();
+  $isVisible = this._$isCartVisible.asObservable();
   private _cartLength: number = 0;
   private _$cartLength: BehaviorSubject<number> = new BehaviorSubject(
     this._cartLength
@@ -24,6 +25,10 @@ export class CartService {
   constructor(private _tokenService: TokenService, private _httpClient: HttpClient) {}
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+  }
+
+  toggleCart(visible: boolean) {
+    this._$isCartVisible.next(visible);
   }
 
   addToCart(product: CartProduct) {

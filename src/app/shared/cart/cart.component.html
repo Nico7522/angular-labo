@@ -1,3 +1,22 @@
 <div class="cart">
     <h3>Votre panier</h3>
+    <button (click)="toggleCart(false)" class="hide" color="primary" mat-raised-button><mat-icon>arrow_back</mat-icon></button>
+
+    @for (product of cartProduct; track $index) {
+        <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{product.modelName}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="imgUrl + '/' + product.image" alt="photo du produit">
+            <mat-card-content>
+                <p>Quantité : {{product.quantity}}</p>
+              <p>{{product.price*product.quantity | currency: 'EUR'}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Retirer</button>
+            </mat-card-actions>
+          </mat-card>
+          
+    }
 </div>

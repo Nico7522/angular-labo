@@ -12,10 +12,11 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { DiscountPipe } from './pipes/discount.pipe';
+import { CartComponent } from './shared/cart/cart.component';
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SnackbarComponent],
+  declarations: [AppComponent, HomeComponent, SnackbarComponent, CartComponent],
   imports: [AppRoutingModule, SharedModule, MaterialModule, HttpClientModule, ReactiveFormsModule, BrowserModule, BrowserAnimationsModule, CommonModule],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: tokenInterceptor, multi: true },
