@@ -90,6 +90,9 @@ export class ProfilComponent implements OnInit, OnDestroy {
           this._addressService.delete(addressId).subscribe({
             next: () => {
               this._snackbarService.openSnackBar('Adresse supprimée !');
+              this.user.adresses = this.user.adresses.filter(a => {
+                return a.adressId !== addressId
+              })
             },
           });
         }

@@ -1,0 +1,16 @@
+.cart {
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    background: white;
+    box-shadow: -18px 2px 44px -5px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -18px 2px 44px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -18px 2px 44px -5px rgba(0, 0, 0, 0.75);
+}
+
+h3 {
+    text-align: center;
+}
+

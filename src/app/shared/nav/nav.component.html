@@ -33,7 +33,7 @@
           }
           @if (isTokenExist) {
           <a routerLink="/user/profil" routerLinkActive="active">Profil</a>
-          <a routerLink="/cart" routerLinkActive="active">Panier</a>
+          <a (click)="toggleCart()" routerLinkActive="active">Panier</a>
           <a (click)="logout()" routerLinkActive="active">Se déconnecter</a>
 
           }
@@ -46,3 +46,9 @@
     </section>
   </mat-sidenav-content>
 </mat-sidenav-container>
+@if (isCartVisible) {
+  <div  [@slideInRight]>
+    <app-cart></app-cart>
+  </div>
+
+}

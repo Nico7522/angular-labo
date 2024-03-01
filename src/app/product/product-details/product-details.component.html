@@ -30,7 +30,16 @@
                 }
 
             </mat-tab>
-            <mat-tab label="Tailles disponibles">Tailles disponibles</mat-tab>
+            <mat-tab label="Tailles disponibles">
+                @if (product.sizes.length > 0) {
+                    @for (size of product.sizes; track $index) {
+                        <p>Taille {{size.size}} | Stock : {{size.stock}}</p>
+                    }
+
+                } @else {
+                    <p>Aucune taille disponible</p>
+                }
+            </mat-tab>
           </mat-tab-group>
     
         </mat-card-content>

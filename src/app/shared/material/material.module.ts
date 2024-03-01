@@ -16,11 +16,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
 
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatRadioModule} from '@angular/material/radio';
 
 const material = [
   MatButtonModule,
@@ -38,7 +40,9 @@ const material = [
   MatTableModule,
   MatAutocompleteModule,
   MatGridListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSelectModule,
+  MatRadioModule
 ]
 
 @NgModule({

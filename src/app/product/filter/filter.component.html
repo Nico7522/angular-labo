@@ -1,0 +1,33 @@
+<form [formGroup]="filterForm" (ngSubmit)="handleSubmit()">
+
+    <mat-form-field>
+        <mat-label>Modèle</mat-label>
+        <input formControlName="modelName" matInput placeholder="Nom du modèle">
+      </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Catégories</mat-label>
+        <mat-select formControlName="category">
+          @for (category of categories; track category) {
+            <mat-option [value]="category">{{category}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Marque</mat-label>
+        <mat-select formControlName="brand">
+          @for (brand of brands; track brand) {
+            <mat-option [value]="brand">{{brand}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="sexe" aria-label="Sexe">
+        <mat-radio-button value="homme">Homme</mat-radio-button>
+        <mat-radio-button value="femme">Femme</mat-radio-button>
+        <mat-radio-button value="mixe">Mixe</mat-radio-button>
+      </mat-radio-group>
+
+      <button mat-raised-button type="submit" color="primary">Rechercher</button>
+</form>

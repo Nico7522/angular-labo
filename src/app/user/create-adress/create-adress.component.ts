@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 import { AddressForm } from '../../models/adress.model';
@@ -16,7 +17,8 @@ import { countries } from '../../utils/auto-complete'
 export class CreateAdressComponent implements OnInit {
   addressForm!: FormGroup;
   countries: string[] = countries;
-  constructor(private _formBuilder: FormBuilder, private _modalService: ModalService, private _tokenService: TokenService, private _addressService: AddressService, private _snackBar: MatSnackBar){}
+  constructor(private _formBuilder: FormBuilder, private _modalService: ModalService, private _tokenService: TokenService, private _addressService: AddressService, private _snackBar: MatSnackBar,
+    private _router: Router){}
   ngOnInit(): void {
     this.addressForm = this._formBuilder.group({
       cityName: ['', Validators.required],
@@ -40,9 +42,12 @@ export class CreateAdressComponent implements OnInit {
     if(this.addressForm.valid) {
     
       const userId: number = this._tokenService.decodeToken().id;
-      
       this._addressService.create(this.addressForm.value, userId).subscribe({
-        next: () => {this.closeModal(), this._openSnackBar()},
+        next: () => {this.closeModal(), this._openSnackBar();
+          setTimeout(() => {
+            location.reload()
+          }, 2000);
+        },
         error: () => {}
       });
     }
@@ -58,7 +63,7 @@ export class CreateAdressComponent implements OnInit {
   private _openSnackBar() {
     this._snackBar.openFromComponent(SnackbarComponent, {
       duration: 1000,
-      data: "Adresse crée !"
+      data: "Adresse créée !"
     });
   }
 }
