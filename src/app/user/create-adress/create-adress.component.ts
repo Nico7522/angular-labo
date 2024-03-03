@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
+import {  map, Observable, startWith } from 'rxjs';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
-import { AddressForm } from '../../models/adress.model';
+import { Address, } from '../../models/adress.model';
 import { AddressService } from '../../services/adress.service';
 import { ModalService } from '../../services/modal.service';
 import { TokenService } from '../../services/token.service';
+import { UserService } from '../../services/user.service';
 import { countries } from '../../utils/auto-complete'
 @Component({
   selector: 'app-create-adress',
@@ -18,7 +18,7 @@ export class CreateAdressComponent implements OnInit {
   addressForm!: FormGroup;
   countries: string[] = countries;
   constructor(private _formBuilder: FormBuilder, private _modalService: ModalService, private _tokenService: TokenService, private _addressService: AddressService, private _snackBar: MatSnackBar,
-    private _router: Router){}
+    private _userService: UserService){}
   ngOnInit(): void {
     this.addressForm = this._formBuilder.group({
       cityName: ['', Validators.required],
@@ -41,12 +41,11 @@ export class CreateAdressComponent implements OnInit {
   handleSubmit() {
     if(this.addressForm.valid) {
     
+   
       const userId: number = this._tokenService.decodeToken().id;
       this._addressService.create(this.addressForm.value, userId).subscribe({
-        next: () => {this.closeModal(), this._openSnackBar();
-          setTimeout(() => {
-            location.reload()
-          }, 2000);
+        next: (address) => {this.closeModal(), this._openSnackBar();
+          this._userService.addNewAddress(address);
         },
         error: () => {}
       });

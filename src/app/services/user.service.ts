@@ -1,15 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { Observable, map, Subject } from 'rxjs';
 import { api } from '../../../environement/environement'
+import { Address } from '../models/adress.model';
 import { Order } from '../models/order.model';
 import { EditUserForm, User } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+  newAddress!: Address
+  private _$newAddress = new Subject<Address>();
+  $newAddress = this._$newAddress.asObservable();
   constructor(private _httpClient: HttpClient) { }
+
+
+  addNewAddress(address: Address) {
+    this._$newAddress.next(address)
+  }
 
   GetById(userId: number) : Observable<User> {
     

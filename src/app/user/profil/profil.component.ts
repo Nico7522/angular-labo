@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, WritableSignal } from '@angular/core';
 import { Order } from '../../models/order.model';
 import { User, UserInfo } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
@@ -11,6 +11,7 @@ import { CreateAdressComponent } from '../create-adress/create-adress.component'
 import { SnackbarService } from '../../services/snackbar.service';
 import { AddressService } from '../../services/adress.service';
 import { ConfirmAddressDeleteComponent } from './confirm-address-delete/confirm-address-delete.component';
+import { Address } from '../../models/adress.model';
 
 
 @Component({
@@ -28,8 +29,9 @@ export class ProfilComponent implements OnInit, OnDestroy {
   panelOpenState = false;
   userSub!: Subscription;
   orderSub!: Subscription;
+  deleteSub!: Subscription
   imageUrl: string = api.img_url;
-
+  newAddedAddress!: Address;
   constructor(
     private _tokenService: TokenService,
     private _userService: UserService,
@@ -45,6 +47,7 @@ export class ProfilComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._userService.$newAddress.subscribe(address => this.user.adresses.push(address))
     this.userId = this._tokenService.decodeToken().id;
 
     this.userSub = this._userService.GetById(this.userId).subscribe({
@@ -84,15 +87,17 @@ export class ProfilComponent implements OnInit, OnDestroy {
       '350px',
       '200px'
     );
-    this._modalService.$canDeleteAddress.subscribe({
+    this.deleteSub = this._modalService.$canDeleteAddress.subscribe({
       next: (canDelete) => {
         if (canDelete) {
           this._addressService.delete(addressId).subscribe({
             next: () => {
               this._snackbarService.openSnackBar('Adresse supprimée !');
-              this.user.adresses = this.user.adresses.filter(a => {
-                return a.adressId !== addressId
-              })
+              this.user.adresses = this.user.adresses.filter((a) => {
+                return a.adressId !== addressId;
+              });
+
+              this.deleteSub.unsubscribe();
             },
           });
         }

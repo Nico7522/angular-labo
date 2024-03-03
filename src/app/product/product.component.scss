@@ -1,7 +1,10 @@
 
-.example-card {
-    max-width: 400px;
+.card {
+    width: 400px;
+    margin: 10px;
+    margin-bottom: 15px;
   }
+
 
   h1 {
     font-family: title;
@@ -67,5 +70,12 @@
   }
 
 
+
+  .article {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
 

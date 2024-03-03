@@ -16,7 +16,6 @@ export class ProductComponent implements OnInit {
   offset: number = 0;
   products: Product[] = [];
   ngOnInit() {
-    this.mybreakpoint = (window.innerWidth <= 600) ? 1 : 4;
     this._productService.getProducts(this.offset).subscribe({
       next: (res) => { this.products = res.data;
       },
@@ -39,6 +38,5 @@ export class ProductComponent implements OnInit {
 
     addToCart(product: CartProduct) {
       this._cartService.addToCart(product);
-
     }
   }
