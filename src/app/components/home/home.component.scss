@@ -69,11 +69,10 @@
     margin: auto;
   }
 
-
-
-  .article {
+  .top-article {
     margin-top: 15px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
