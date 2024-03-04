@@ -11,7 +11,7 @@
             <img mat-card-image [src]="imgUrl + '/' + product.image" alt="photo du produit">
             <mat-card-content>
                 <p>Quantité : {{product.quantity}}</p>
-              <p>{{product.price*product.quantity | currency: 'EUR'}}</p>
+              <p>{{(product.price - (product.price*product.discount))*product.quantity | currency: 'EUR'}}</p>
             </mat-card-content>
             <mat-card-actions>
               <button (click)="remove(product.productId, product.sizeId)" mat-button>Retirer</button>
@@ -22,5 +22,7 @@
         @if (totalPrice > 0) {
             <hr>
           <p class="total-price">Prix total : {{totalPrice | currency: 'EUR'}}</p>
+          <button class="btn-order" (click)="order()"  mat-raised-button color="primary">Commander</button>
+
         }
 </div>

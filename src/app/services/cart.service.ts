@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { CartOrder, CartProduct } from '../models/cart.model';
 import { TokenService } from './token.service';
 import { api } from '../../../environement/environement'
+import { OrderedProducts } from '../models/order.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +18,8 @@ export class CartService {
   $cart_length = this._$cartLength.asObservable();
 
   private _cartProduct: CartProduct[] = [];
+  private _cartProductOrder: CartProduct[] = [];
+
   private _$cartProduct: BehaviorSubject<CartProduct[]> = new BehaviorSubject<
   CartProduct[]
   >(this._cartProduct);
@@ -38,6 +41,7 @@ export class CartService {
   }
 
   addToCart(product: CartProduct) {
+    
     let canAdd = true;
     this._cartProduct.map((p) => {
      
@@ -47,8 +51,6 @@ export class CartService {
         this._cartLength++;
         this._$cartProduct.next(this._cartProduct);
         this._$cartLength.next(this._cartLength);
-        this._totalPrice = this._totalPrice + (p.price*(p.discount > 0 ? p.discount : 1));
-        this._$totalPrice.next(this._totalPrice);
       }
     });
 
@@ -57,27 +59,30 @@ export class CartService {
       this._$cartProduct.next(this._cartProduct);
       this._cartLength++;
       this._$cartLength.next(this._cartLength);
-      this._totalPrice = this._totalPrice + (product.price*(product.discount > 0 ? product.discount : 1));
-      this._$totalPrice.next(this._totalPrice);
-
+      
     }
+    this._totalPrice += (product.price - (product.price*product.discount));
+    this._$totalPrice.next(this._totalPrice);
+
+    //
+    
     }
 
     removeFromCart(productId: number, sizeId: number): void {
       this._cartProduct = this._cartProduct.filter((p) => {
         if (p.productId === productId) {
           if (p.sizeId === sizeId) {
-            if (p.quantity > 1) {
-              this._totalPrice = this._totalPrice - (p.price*(p.discount > 0 ? p.discount : 1));
-              this._$totalPrice.next(this._totalPrice);
+            if (p.quantity >= 1) {
               this._cartLength = this._cartLength - 1;
               this._$cartLength.next(this._cartLength);
+              this._totalPrice -= (p.price - (p.price*p.discount));
+              this._$totalPrice.next(this._totalPrice);
               return (p.quantity = p.quantity - 1);
             } else {
-              this._totalPrice = this._totalPrice - (p.price*(p.discount > 0 ? p.discount : 1));
-              this._$totalPrice.next(this._totalPrice);
               this._cartLength = this._cartLength - 1;
               this._$cartLength.next(this._cartLength);
+              this._totalPrice -= (p.price - (p.price*p.discount));
+              this._$totalPrice.next(this._totalPrice);
               return false;
             }
           } else {
@@ -89,20 +94,17 @@ export class CartService {
       this._$cartProduct.next(this._cartProduct);
     }
 
-  createCommand() {
-    if (!this._tokenService.isTokenExist) {
-      return;
-    } else {
+  order() {
+
       let order: CartOrder = {
         userId: this._tokenService.decodeToken().id,
         totalReduction: 0.2,
         orderProduct: this._cartProduct,
       };
+
       console.log(order);
       this._httpClient
         .post(`${api.url}/order`, order)
         .subscribe((res) => console.log(res));
-    }
-    // POSTER LA COMMMANDE
   }
 }
