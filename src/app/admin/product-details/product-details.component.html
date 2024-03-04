@@ -1,0 +1,62 @@
+<h1>Détails du produit</h1>
+<h1>Détails</h1>
+
+<section class="product-details">
+    @if (!product) {
+        <p>Chargement</p>
+    } @else {
+        <button (click)="back()" class="back" mat-raised-button color="primary">Retour</button>
+        
+            <mat-card class="card">
+                <mat-card-header class="header-container">
+                        <div mat-card-avatar [class]="product.brand"></div>
+                        <mat-card-title>{{product.modelName}}</mat-card-title>
+                      <mat-card-subtitle>  {{product.brand | uppercase}} </mat-card-subtitle>
+    
+                      <button class="btn-edit" (click)="edit()"  mat-mini-fab color="primary" ><mat-icon>mode_edit</mat-icon></button>
+                </mat-card-header>
+                <img mat-card-image [src]="imageUrl + '/' + product.image" alt="photo du produit">
+                <mat-card-content>
+                  <p>{{product.description}}</p>
+                  <p [class]="product.discount > 0 ? 'on-discount' : ''">{{product.price | currency: 'EUR'}}</p>
+                  @if (product.discount > 0) {
+                    <p class="discount">-{{product.discount | discount}}%</p>
+                    <p> {{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
+                  }
+                 
+                  <mat-tab-group>
+                    <mat-tab label="Catégories">
+                        @if (product.categories.length > 0) {
+                            @for (category of product.categories; track $index) {
+                                <p>{{category.categoryName}}</p>
+                            }
+                              <!-- Ajout des catégories -->
+                              <button mat-raised-button color="primary">Ajouter</button>
+                        } @else {
+                            <p>Aucune catégorie</p>
+                            <!-- Ajout des catégories -->
+                            <button mat-raised-button color="primary">Ajouter</button>
+                        }
+        
+                    </mat-tab>
+                    <mat-tab label="Tailles disponibles">
+                        @if (product.sizes.length > 0) {
+                            @for (size of product.sizes; track size.sizeId) {
+                                <p>Taille {{size.size}} - Stock : {{size.stock}}</p>
+                                }
+                                   <!-- Ajout des tailles -->
+                               <button mat-raised-button color="primary">Ajouter</button>
+        
+                        } @else {
+                            <p>Aucune taille disponible</p>
+                               <!-- Ajout des tailles -->
+                               <button mat-raised-button color="primary">Ajouter</button>
+                        }
+                    </mat-tab>
+                  </mat-tab-group>
+            
+                </mat-card-content>
+              </mat-card>
+    }
+
+</section>

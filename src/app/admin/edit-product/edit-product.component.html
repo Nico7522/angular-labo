@@ -1,0 +1,12 @@
+<h1>Editer le produit</h1>
+<form action="" [formGroup]="editForm">
+    <mat-form-field>
+        <mat-label>Nom du modèle</mat-label>
+        <input type="text" matInput  
+               formControlName="modelName"
+              >
+               @if (editForm.get("firstName")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+</form>

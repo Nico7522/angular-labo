@@ -1,0 +1,32 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
+}
+
+button {
+    font-size: 0.9em;
+    margin-right: 3px;
+    margin-top: 10px;
+}
+
+mat-error {
+    font-size: 0.7em;
+    text-align: center;
+}
+
+mat-form-field {
+    width: 90%;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 3px;
+}

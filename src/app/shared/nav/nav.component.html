@@ -12,6 +12,10 @@
       }
       @if (isTokenExist) {
         <a routerLink="/user/profil" routerLinkActive="active">Profil</a>
+        @if (isAdmin()) {
+          <a routerLink="/admin" routerLinkActive="active">Administration</a>
+
+          }
         <a routerLink="/cart" routerLinkActive="active">Panier</a>
         <a (click)="logout()" routerLinkActive="active">Se déconnecter</a>
         }
@@ -33,6 +37,10 @@
           }
           @if (isTokenExist) {
           <a routerLink="/user/profil" routerLinkActive="active">Profil</a>
+          @if (isAdmin()) {
+          <a routerLink="/admin" routerLinkActive="active">Administration</a>
+
+          }
           <a (click)="toggleCart()" routerLinkActive="active">Panier</a>
           <a (click)="logout()" routerLinkActive="active">Se déconnecter</a>
 

@@ -1,0 +1,72 @@
+.card {
+    width: 50%;
+    margin: auto;
+}
+
+.discount {
+    color: red;
+    text-decoration: none;
+}
+
+mat-tab-group {
+    text-align: center;
+}
+mat-tab {
+    text-align: center !important;
+}
+
+.mat-mdc-tab-body-content {
+    
+    overflow: hidden !important;
+}
+
+mat-radio-group {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back {
+    margin-bottom: 15px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btn-edit {
+    margin-left: auto;
+}
+
+.nike {
+    background-image: url('../../../assets/nike.jpg');
+    background-size: cover;
+  }
+
+  .Puma {
+    background-image: url('../../../assets/puma.jpg');
+    background-size: cover;
+  }
+
+  .mat-mdc-tab-body-content {
+    height: 100%;
+    overflow: hidden; 
+  }
+
+.class {
+    overflow-y: hidden !important;
+}
+
+
+
+
+

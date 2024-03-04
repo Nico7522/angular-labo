@@ -71,4 +71,13 @@ export class NavComponent implements OnInit {
       data: 'Déconnecté !',
     });
   }
+
+  isAdmin(): boolean {
+    if(this._tokenService.isTokenExist) {
+      if(this._tokenService.decodeToken().role === "Admin") {
+        return true
+      }
+    }
+    return false
+  }
 }

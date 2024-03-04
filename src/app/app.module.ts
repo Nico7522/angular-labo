@@ -10,8 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { tokenInterceptor } from './interceptors/token.interceptor';
-import { DiscountPipe } from './pipes/discount.pipe';
+
 import { CartComponent } from './shared/cart/cart.component';
 
 
