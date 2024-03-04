@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CartOrder, CartProduct } from '../models/cart.model';
 import { TokenService } from './token.service';
 import { api } from '../../../environement/environement'
-import { OrderedProducts } from '../models/order.model';
+import { Order, OrderedProducts } from '../models/order.model';
+import { refreshCart } from '../utils/refresh-cart';
 @Injectable({
   providedIn: 'root',
 })
@@ -73,16 +74,11 @@ export class CartService {
         if (p.productId === productId) {
           if (p.sizeId === sizeId) {
             if (p.quantity >= 1) {
-              this._cartLength = this._cartLength - 1;
-              this._$cartLength.next(this._cartLength);
-              this._totalPrice -= (p.price - (p.price*p.discount));
-              this._$totalPrice.next(this._totalPrice);
+              this._totalPrice = refreshCart(p, this._totalPrice, this._$totalPrice, this._cartLength, this._$cartLength);        
               return (p.quantity = p.quantity - 1);
             } else {
-              this._cartLength = this._cartLength - 1;
-              this._$cartLength.next(this._cartLength);
-              this._totalPrice -= (p.price - (p.price*p.discount));
-              this._$totalPrice.next(this._totalPrice);
+
+              this._totalPrice = refreshCart(p, this._totalPrice, this._$totalPrice, this._cartLength, this._$cartLength);
               return false;
             }
           } else {
@@ -94,7 +90,7 @@ export class CartService {
       this._$cartProduct.next(this._cartProduct);
     }
 
-  order() {
+  order() : Observable<Order> {
 
       let order: CartOrder = {
         userId: this._tokenService.decodeToken().id,
@@ -102,9 +98,7 @@ export class CartService {
         orderProduct: this._cartProduct,
       };
 
-      console.log(order);
-      this._httpClient
-        .post(`${api.url}/order`, order)
-        .subscribe((res) => console.log(res));
+      return this._httpClient.post<Order>(`${api.url}/order`, order) 
+    
   }
 }

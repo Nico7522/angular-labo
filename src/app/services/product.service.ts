@@ -10,21 +10,25 @@ import { Response } from '../models/response.model'
 })
 export class ProductService {
 
-  constructor(private _htpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getProducts(offset : number): Observable<Response<Product[]>> {
-    return this._htpClient.get<Response<Product[]>>(`${api.url}/product/paginate?offset=${offset}`)
+    return this._httpClient.get<Response<Product[]>>(`${api.url}/product/paginate?offset=${offset}`)
+  }
+
+  getTopProduct() : Observable<Response<Product[]>> {
+    return this._httpClient.get<Response<Product[]>>(`${api.url}/product/top`);
   }
 
   getById(productId: number): Observable<Response<Product>> {
-    return this._htpClient.get<Response<Product>>(`${api.url}/product/${productId}`)
+    return this._httpClient.get<Response<Product>>(`${api.url}/product/${productId}`)
   }
 
   filter(filterForm: Filter) : Observable<Response<Product[]>> {
     const params = new HttpParams({
       fromObject: { ...filterForm },
     });
-    return this._htpClient.get<Response<Product[]>>(`${api.url}/product/search/filter`, { params })
+    return this._httpClient.get<Response<Product[]>>(`${api.url}/product/search/filter`, { params })
   }
 
 

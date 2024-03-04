@@ -9,12 +9,12 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     ProductComponent,
-    DiscountPipe,
     ProductDetailsComponent,
 
     FilterComponent,
@@ -24,8 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ProductRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
     
-  ]
+  ],
+
 })
 export class ProductModule { }

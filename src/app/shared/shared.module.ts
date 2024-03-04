@@ -6,12 +6,13 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { FrenchDatePipe } from '../pipes/french-date.pipe';
 import { ExpansionComponent } from './expansion/expansion.component';
 import { CommonModule } from '@angular/common';
+import { DiscountPipe } from '../pipes/discount.pipe';
 
 
 @NgModule({
-  declarations: [NavComponent, UserCardComponent, FrenchDatePipe, ExpansionComponent],
+  declarations: [NavComponent, UserCardComponent, FrenchDatePipe, ExpansionComponent, DiscountPipe],
   imports: [RouterModule, MaterialModule, CommonModule],
-  exports: [NavComponent, UserCardComponent, FrenchDatePipe, ExpansionComponent],
+  exports: [NavComponent, UserCardComponent, FrenchDatePipe, ExpansionComponent, DiscountPipe],
 
 
 })

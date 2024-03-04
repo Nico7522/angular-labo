@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { api } from '../../../../environement/environement'
 import { CartService } from '../../services/cart.service';
 import { CartProduct } from '../../models/cart.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   errorMessage!: string;
   loading: boolean = true;
   imageUrl: string = api.img_url;
-  constructor(private _productService: ProductService, private _activatedRoute: ActivatedRoute, private _cartService: CartService){}
+  constructor(private _productService: ProductService, private _activatedRoute: ActivatedRoute, private _cartService: CartService, private _location: Location){}
   ngOnInit(): void {
     
     
@@ -49,6 +50,10 @@ export class ProductDetailsComponent implements OnInit {
       image: this.product.image,
     };
     this._cartService.addToCart(product)
+  }
+
+  back(){
+    this._location.back();
   }
 
 

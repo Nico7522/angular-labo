@@ -3,6 +3,7 @@
 @if (!product) {
     <p>Chargement</p>
 } @else {
+    <button (click)="back()" class="back" mat-raised-button color="primary">Retour</button>
     <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar [class]="product.brand"></div>
@@ -36,7 +37,7 @@
                 @if (product.sizes.length > 0) {
                     <mat-radio-group (change)="handleSize($event)" aria-label="Select an option">
                     @for (size of product.sizes; track size.sizeId) {
-                            <mat-radio-button [value]="size.sizeId">{{size.size}}</mat-radio-button>
+                            <mat-radio-button *ngIf="size.stock > 0" [value]="size.sizeId">{{size.size}}</mat-radio-button>
                         }
                     </mat-radio-group>
 

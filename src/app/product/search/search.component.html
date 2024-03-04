@@ -1,34 +1,28 @@
 <h1>Résultat</h1>
 <button class="back" routerLink="/products" mat-raised-button color="primary">Retour</button>
-<mat-grid-list [cols]="mybreakpoint" rowHeight="700px">
-    @for (product of filteredProduct; track $index) {
-    <mat-grid-tile><mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar [class]="product.brand"></div>
-          <mat-card-title>{{product.modelName}}</mat-card-title>
-          <mat-card-subtitle>{{product.brand | uppercase}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image height="450px" [src]="imageUrl + '/' + product.image" alt="photo du produit">
-        <mat-card-content>
-          <p>{{product.description}}</p>
-          <div class="price-section">
-            <p [class]="product.discount > 0 ? 'on-discount' : ''">{{product.price | currency: 'EUR'}}  
-            </p>
-            @if (product.discount > 0) {
-              <p class="discount">    -{{product.discount | discount}}%</p>
-              <p>{{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
-            }
-            
-  
-          </div>
-  
-        </mat-card-content>
-        <mat-card-actions>
-          <button routerLink="/products/details/{{product.productId}}" mat-button>Détails</button>
-          <button mat-button>Ajouter au panier</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  
-    }
-  </mat-grid-list>
+<section class="filtered-article">
+  @for (product of filteredProduct; track $index) {
+            <mat-card class="card">
+              <mat-card-header>
+                <div mat-card-avatar [class]="product.brand"></div>
+                <mat-card-title>{{product.modelName}}</mat-card-title>
+                <mat-card-subtitle>{{product.brand | uppercase}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image height="450px" [src]="imageUrl + '/' + product.image" alt="photo du produit">
+              <mat-card-content>
+                <p>{{product.description}}</p>
+                <div class="price-section">
+                  <p [class]="product.discount > 0 ? 'on-discount' : ''">{{product.price | currency: 'EUR'}}  
+                  </p>
+                  @if (product.discount > 0) {
+                    <p class="discount">    -{{product.discount | discount}}%</p>
+                    <p>{{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
+                  }
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button routerLink="/products/details/{{product.productId}}" mat-button>Détails</button>
+              </mat-card-actions>
+            </mat-card>
+        }
+      </section>
