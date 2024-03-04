@@ -10,14 +10,26 @@ import { Subject } from 'rxjs';
 })
 export class CartComponent implements OnInit {
   imgUrl: string = api.img_url
-  cartProduct: CartProduct[] = []
+  cartProduct: CartProduct[] = [];
+  totalPrice: number = 0;
   constructor(private _cartService: CartService) {}
 
   toggleCart(visible: boolean) {
     this._cartService.toggleCart(visible);
   }
 
+  remove(productId: number, sizeId: number){
+    this._cartService.removeFromCart(productId, sizeId);
+  }
+
   ngOnInit(): void {
-    this._cartService.$cartProduct.subscribe(products => this.cartProduct = products)
+    this._cartService.$cartProduct.subscribe({
+      next: (products) => {
+        (this.cartProduct = products)
+      },
+    });
+
+    this._cartService.$totalPrice.subscribe(total => this.totalPrice = total);
+
   }
 }

@@ -17,7 +17,7 @@
             <p class="discount">-{{product.discount | discount}}%</p>
             <p> {{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
           }
-          <button (click)="addToCart()" mat-raised-button>Ajouter au panier</button>
+          <button [disabled]="!selectedSize" (click)="addToCart()" mat-raised-button>Ajouter au panier</button>
 
 
           <mat-tab-group>

@@ -14,9 +14,13 @@
               <p>{{product.price*product.quantity | currency: 'EUR'}}</p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-button>Retirer</button>
+              <button (click)="remove(product.productId, product.sizeId)" mat-button>Retirer</button>
             </mat-card-actions>
           </mat-card>
           
-    }
+        }
+        @if (totalPrice > 0) {
+            <hr>
+          <p class="total-price">Prix total : {{totalPrice | currency: 'EUR'}}</p>
+        }
 </div>

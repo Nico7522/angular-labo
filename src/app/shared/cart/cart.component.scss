@@ -22,7 +22,7 @@ img {
 
 .card {
     max-width: 70%;
-    margin: auto;
+    margin: 15px auto;
 
   }
 
@@ -36,4 +36,9 @@ img {
 
   .mat-mdc-raised-button > .mat-icon {
     margin-left: 5px;
+  }
+
+  .total-price {
+    font-size: 2em;
+    text-align: center;
   }
