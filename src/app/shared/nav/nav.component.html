@@ -16,7 +16,7 @@
           <a routerLink="/admin" routerLinkActive="active">Administration</a>
 
           }
-        <a routerLink="/cart" routerLinkActive="active">Panier</a>
+        <a (click)="toggleCart()" routerLinkActive="active">Panier</a>
         <a (click)="logout()" routerLinkActive="active">Se déconnecter</a>
         }
 			<a routerLink="/contact" (click)="clickHandler()" routerLinkActive="active">À propos</a>

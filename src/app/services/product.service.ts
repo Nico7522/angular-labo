@@ -48,10 +48,17 @@ export class ProductService {
     return this._httpClient.post<Response<Product>>(`${api.url}/product/${productId}/category`, {categoryId});
   }
 
-  addSizeToProduct(sizeForm: SizeForm) {
-    console.log(sizeForm);
+  addSizeToProduct(sizeForm: SizeForm) : Observable<Response<Product>> {
     
-    return this._httpClient.post(`${api.url}/product/${sizeForm.productId}/size/${sizeForm.sizeId}`, {stock: sizeForm.stock})
+    return this._httpClient.post<Response<Product>>(`${api.url}/product/${sizeForm.productId}/size/${sizeForm.sizeId}`, {stock: sizeForm.stock})
+  }
+
+  deleteCategoryFromProduct(productId: number, categoryId: number) : Observable<boolean> {
+    return this._httpClient.delete<boolean>(`${api.url}/product/${productId}/category/${categoryId}`)
+  }
+
+  updateStock(sizeId: number, productId: number, stock: number) : Observable<Response<Product>> {
+    return this._httpClient.patch<Response<Product>>(`${api.url}/product/stock/${sizeId}/${productId}`, {stock})
   }
 }
 

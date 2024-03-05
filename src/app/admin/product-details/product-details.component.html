@@ -56,26 +56,31 @@
                                 <div class="size-display">
                                     <p>Taille {{size.size}} - Stock : {{size.stock}}</p>
                                     <button class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
-                                </div>
+                                    <button (click)="openUpdateStockModal(size.sizeId)" class="btn-delete" mat-icon-button><mat-icon  class="delete" >arrow_upward</mat-icon></button> 
 
+                                </div>
                                 }
-                                   <!-- Ajout des tailles -->
-        
                         } @else {
                             <p>Aucune taille disponible</p>
-                               <!-- Ajout des tailles -->
                         }
                         <button (click)="openAddSize()" mat-raised-button color="primary">Ajouter</button>
-                        <div *ngIf="isSizeFormOpen" class="size-form">
-                            <mat-form-field>
-                              <mat-label>Taille</mat-label>
-                              <mat-select (ngModelChange)="openStockModal()" [formControl]="sizeForm">
-                                @for (size of sizes; track size) {
-                                  <mat-option [value]="size.sizeId">{{size.size}}</mat-option>
-                                }
-                              </mat-select>
-                            </mat-form-field>
-                            <button mat-button (click)="handleSize()">Valider</button>
+                        <div *ngIf="isSizeFormOpen" >
+                            <form [formGroup]="sizeForm" class="size-form">
+                                <mat-form-field>
+                                  <mat-label>Taille</mat-label>
+                                  <mat-select formControlName="sizeId">
+                                    @for (size of sizes; track size) {
+                                      <mat-option [value]="size.sizeId">{{size.size}}</mat-option>
+                                    }
+                                  </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Quantité</mat-label>
+                                        <input formControlName="stock" type="number" matInput>
+                                  </mat-form-field>
+                                <button mat-button (click)="handleSize()">Valider</button>
+                            
+                            </form>
                         </div>
                         
                     </mat-tab>

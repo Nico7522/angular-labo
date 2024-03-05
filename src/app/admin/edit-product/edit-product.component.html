@@ -1,5 +1,5 @@
 <h1>Editer le produit</h1>
-<form (ngSubmit)="handleSubmit()" [formGroup]="editForm">
+<form  [formGroup]="editForm">
     <mat-form-field>
         <mat-label>Nom du modèle</mat-label>
         <input type="text" matInput  
@@ -57,7 +57,7 @@
       </mat-form-field>
 
       <div class="btn-validation">
-          <button mat-raised-button color="primary">Editer</button>
+          <button (click)="handleSubmit()" mat-raised-button color="primary">Editer</button>
           <button (click)="close()" mat-raised-button color="warn">Annuler</button>
       </div>
 

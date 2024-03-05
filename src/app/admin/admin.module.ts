@@ -8,9 +8,9 @@ import { UserComponent } from './user/user.component';
 import { ProductComponent } from './product/product.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
-import { StockSelectModalComponent } from './product-details/stock-select-modal/stock-select-modal.component';
+import { UpdateStockComponent } from './update-stock/update-stock.component';
 
 
 @NgModule({
@@ -20,14 +20,15 @@ import { StockSelectModalComponent } from './product-details/stock-select-modal/
     ProductComponent,
     ProductDetailsComponent,
     EditProductComponent,
-    StockSelectModalComponent
+    UpdateStockComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

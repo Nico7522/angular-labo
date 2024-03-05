@@ -8,11 +8,11 @@ import { ModalService } from '../../services/modal.service';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category.model';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SnackbarService } from '../../services/snackbar.service';
 import { SizeService } from '../../services/size.service';
 import { Size, SizeForm } from '../../models/size.model';
-import { StockSelectModalComponent } from './stock-select-modal/stock-select-modal.component';
+import { UpdateStockComponent } from '../update-stock/update-stock.component';
 
 @Component({
   selector: 'app-product-details',
@@ -29,10 +29,11 @@ export class ProductDetailsComponent implements OnInit {
   isSizeFormOpen: boolean = false;
   categories: Category[] = [];
   sizes: Size[] = [];
-  sizeStock!: SizeForm
+  sizeStock!: SizeForm;
+  stock!: number;
 
   categoryForm = new FormControl('');
-  sizeForm = new FormControl('');
+  sizeForm!: FormGroup;
 
   alertMessage!: string;
   constructor(
@@ -42,7 +43,8 @@ export class ProductDetailsComponent implements OnInit {
     private _modalService: ModalService,
     private _categoryService: CategoryService,
     private _snackbarService: SnackbarService,
-    private _sizeService: SizeService
+    private _sizeService: SizeService,
+    private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,11 @@ export class ProductDetailsComponent implements OnInit {
     this._productService.getById(this.productId).subscribe({
       next: (res) => (this.product = res.data),
     });
+
+    this.sizeForm = this._formBuilder.group({
+      sizeId: [''],
+      stock: [''],
+    })
   }
 
   back() {
@@ -88,6 +95,8 @@ export class ProductDetailsComponent implements OnInit {
         .addCategoryToProduct(categories, this.product.productId)
         .subscribe({
           next: (res) => {
+            console.log("cc");
+            
             this._snackbarService.openSnackBar('Catégorie ajoutée !');
           },
           error: (err) => {
@@ -110,12 +119,19 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   handleSize(){
-    
-    this._productService.$sizeForm.subscribe(form => this.sizeStock = form)
-    this._productService.addSizeToProduct(this.sizeStock).subscribe(res => console.log(res))
+    if(this.sizeForm.valid) {
+      const sizeForm: SizeForm = {
+        productId: this.product.productId,
+        sizeId: this.sizeForm.get("sizeId")?.value,
+        stock: this.sizeForm.get('stock')?.value,
+      }
+      this._productService.addSizeToProduct(sizeForm).subscribe(res => console.log(res))
+    }
   }
 
-  openStockModal() {
-    this._modalService.openModal(StockSelectModalComponent, '200ms', '200ms', undefined, undefined, {sizeId: this.sizeForm.value, productId: this.product.productId})
+  openUpdateStockModal(sizeId: number) {
+    this._modalService.openModal(UpdateStockComponent, '300ms', '300ms', '300px', '400px', {sizeId: sizeId, productId: this.productId });
   }
+
+ 
 }

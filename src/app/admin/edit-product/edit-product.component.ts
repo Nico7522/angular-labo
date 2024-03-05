@@ -26,7 +26,6 @@ export class EditProductComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.product = this.data;
-    console.log(this.product);
     this.editForm = this._formBuilder.group({
       description: ['', [Validators.required]],
       modelName: ['', [Validators.required]],

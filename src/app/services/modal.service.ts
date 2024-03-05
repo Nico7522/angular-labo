@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ModalService {
     }
 
 
-    openModal(component: ComponentType<unknown> ,enterAnimationDuration: string, exitAnimationDuration: string, width: string = "300px", height: string = "350px", data?: any): void {
+    openModal(component: ComponentType<unknown> ,enterAnimationDuration: string, exitAnimationDuration: string, width: string = "300px", height: string = "350px", data?: any): MatDialogRef<unknown, any> {
       const dialog = this._dialog.open(component, {
       width: width,
       height: height,
@@ -27,13 +27,9 @@ export class ModalService {
       exitAnimationDuration,
       data: data
     });
+    
+    return dialog;
 
-  
-
-   
-   
-
-  
   }
   closeModal(){
     this._dialog.closeAll();
