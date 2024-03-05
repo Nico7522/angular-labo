@@ -22,6 +22,8 @@ export class FilterComponent implements OnInit {
     })
   }
 
+
+
   handleSubmit() {
 
     if (this.filterForm.valid) {

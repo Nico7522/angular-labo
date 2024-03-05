@@ -30,3 +30,13 @@ mat-form-field {
     text-align: center;
     margin-top: 3px;
 }
+
+.btn-validation {
+    display: flex;
+    flex-direction: row;
+}
+
+mat-radio-group {
+    display: flex;
+    flex-direction: row;
+}

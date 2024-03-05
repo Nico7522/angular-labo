@@ -1,6 +1,4 @@
 <h1>Détails du produit</h1>
-<h1>Détails</h1>
-
 <section class="product-details">
     @if (!product) {
         <p>Chargement</p>
@@ -28,35 +26,65 @@
                     <mat-tab label="Catégories">
                         @if (product.categories.length > 0) {
                             @for (category of product.categories; track $index) {
-                                <p>{{category.categoryName}}</p>
+                                <div class="category-display">
+                                    <p>{{category.categoryName}}</p>
+                                    <button class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
+
+                                </div>
                             }
-                              <!-- Ajout des catégories -->
-                              <button mat-raised-button color="primary">Ajouter</button>
+                    
                         } @else {
                             <p>Aucune catégorie</p>
-                            <!-- Ajout des catégories -->
-                            <button mat-raised-button color="primary">Ajouter</button>
                         }
+                        <button (click)="openAddCategory()" mat-raised-button color="primary">Ajouter</button>
+                        <div *ngIf="isCategoryFormOpen" class="category-form">
+                            <mat-form-field>
+                              <mat-label>Catégories</mat-label>
+                              <mat-select [formControl]="categoryForm" multiple >
+                                @for (category of categories; track category) {
+                                  <mat-option [value]="category.categoryId">{{category.categoryName}}</mat-option>
+                                }
+                              </mat-select>
+                            </mat-form-field>
+                            <button mat-button (click)="handleCategories()">Valider</button>
+                        </div>
         
                     </mat-tab>
                     <mat-tab label="Tailles disponibles">
                         @if (product.sizes.length > 0) {
                             @for (size of product.sizes; track size.sizeId) {
-                                <p>Taille {{size.size}} - Stock : {{size.stock}}</p>
+                                <div class="size-display">
+                                    <p>Taille {{size.size}} - Stock : {{size.stock}}</p>
+                                    <button class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
+                                </div>
+
                                 }
                                    <!-- Ajout des tailles -->
-                               <button mat-raised-button color="primary">Ajouter</button>
         
                         } @else {
                             <p>Aucune taille disponible</p>
                                <!-- Ajout des tailles -->
-                               <button mat-raised-button color="primary">Ajouter</button>
                         }
+                        <button (click)="openAddSize()" mat-raised-button color="primary">Ajouter</button>
+                        <div *ngIf="isSizeFormOpen" class="size-form">
+                            <mat-form-field>
+                              <mat-label>Taille</mat-label>
+                              <mat-select (ngModelChange)="openStockModal()" [formControl]="sizeForm">
+                                @for (size of sizes; track size) {
+                                  <mat-option [value]="size.sizeId">{{size.size}}</mat-option>
+                                }
+                              </mat-select>
+                            </mat-form-field>
+                            <button mat-button (click)="handleSize()">Valider</button>
+                        </div>
+                        
                     </mat-tab>
-                  </mat-tab-group>
-            
-                </mat-card-content>
+                </mat-tab-group>
+                
+                @if (alertMessage) {
+                    <p class="alert">{{alertMessage}}</p>
+                }
+            </mat-card-content>
               </mat-card>
     }
-
 </section>

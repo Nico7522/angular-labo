@@ -18,3 +18,11 @@ export interface AvailableSizes {
   size: number;
   stock: number;
 }
+
+export interface editProductForm {
+  modelName: string;
+  description: string;
+  brand: string;
+  price: number;
+  discount: number;
+}

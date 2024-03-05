@@ -19,7 +19,7 @@ export class ModalService {
 
 
     openModal(component: ComponentType<unknown> ,enterAnimationDuration: string, exitAnimationDuration: string, width: string = "300px", height: string = "350px", data?: any): void {
-      this._dialog.open(component, {
+      const dialog = this._dialog.open(component, {
       width: width,
       height: height,
       hasBackdrop: false,
@@ -27,6 +27,8 @@ export class ModalService {
       exitAnimationDuration,
       data: data
     });
+
+  
 
    
    

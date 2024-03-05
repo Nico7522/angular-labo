@@ -1,12 +1,68 @@
 <h1>Editer le produit</h1>
-<form action="" [formGroup]="editForm">
+<form (ngSubmit)="handleSubmit()" [formGroup]="editForm">
     <mat-form-field>
         <mat-label>Nom du modèle</mat-label>
         <input type="text" matInput  
                formControlName="modelName"
               >
-               @if (editForm.get("firstName")?.invalid) {
+               @if (editForm.get("modelName")?.invalid) {
                   <mat-error>Champ requis*</mat-error>
                }
       </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Marque</mat-label>
+        <input type="text" matInput  
+               formControlName="brand"
+              >
+               @if (editForm.get("brand")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input type="text" matInput  
+               formControlName="description"
+              >
+               @if (editForm.get("description")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-radio-group formControlName="sexe" aria-label="Sexe">
+        <mat-radio-button value="homme">Homme</mat-radio-button>
+        <mat-radio-button value="femme">Femme</mat-radio-button>
+        <mat-radio-button value="mixe">Mixe</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field>
+        <mat-label>Prix</mat-label>
+        <input type="text" matInput  
+               formControlName="price"
+              >
+               @if (editForm.get("price")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Promotion</mat-label>
+        <input type="text" matInput  
+               formControlName="discount"
+              >
+               @if (editForm.get("discount")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <div class="btn-validation">
+          <button mat-raised-button color="primary">Editer</button>
+          <button (click)="close()" mat-raised-button color="warn">Annuler</button>
+      </div>
+
 </form>
+
+@if (alertMessage) {
+    <p>{{alertMessage}}</p>
+}

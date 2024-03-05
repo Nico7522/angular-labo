@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { StockSelectModalComponent } from './product-details/stock-select-modal/stock-select-modal.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     UserComponent,
     ProductComponent,
     ProductDetailsComponent,
-    EditProductComponent
+    EditProductComponent,
+    StockSelectModalComponent
   ],
   imports: [
     CommonModule,
