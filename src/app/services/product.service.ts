@@ -60,6 +60,14 @@ export class ProductService {
   updateStock(sizeId: number, productId: number, stock: number) : Observable<Response<Product>> {
     return this._httpClient.patch<Response<Product>>(`${api.url}/product/stock/${sizeId}/${productId}`, {stock})
   }
+
+  updateImage(image: File, productId: number) : Observable<Response<string>> {
+    const formData: FormData = new FormData();
+    formData.append('file', image);
+    return this._httpClient.put<Response<string>>(`${api.url}/product/${productId}/image`, formData)
+
+
+  }
 }
 
 

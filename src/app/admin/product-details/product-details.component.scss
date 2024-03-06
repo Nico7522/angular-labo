@@ -82,3 +82,20 @@ section {
     text-align: center;
 }
 
+.file-input {
+    display: none;
+  }
+
+  .file-upload {
+    margin: 5px auto;
+  }
+
+  .success {
+    color: green;
+    text-align: center;
+  }
+
+  .alert {
+    color: red;
+    text-align: center;
+  }

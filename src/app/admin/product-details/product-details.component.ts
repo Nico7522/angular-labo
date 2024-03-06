@@ -31,6 +31,8 @@ export class ProductDetailsComponent implements OnInit {
   sizes: Size[] = [];
   sizeStock!: SizeForm;
   stock!: number;
+  productImg!: File;
+  message!: string;
 
   categoryForm = new FormControl('');
   sizeForm!: FormGroup;
@@ -56,7 +58,28 @@ export class ProductDetailsComponent implements OnInit {
     this.sizeForm = this._formBuilder.group({
       sizeId: [''],
       stock: [''],
-    })
+    });
+  }
+
+  onImgChange(event: any) {
+    this.productImg = event.target.files[0];
+    console.log(this.productImg);
+
+    this._productService
+      .updateImage(this.productImg, this.productId)
+      .subscribe({
+        next: (res) => {
+          this.product.image = res.data;
+          this.message = 'Image modifiée.';
+        },
+        error: (err) => {
+          this.message = 'Une erreur est survenue.';
+        }
+      });
+  }
+
+  updateImage(productId: number) {
+    console.log(this.productImg, this.productId);
   }
 
   back() {
@@ -64,7 +87,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   edit() {
-    this._modalService.openModal(
+    const dialogRef = this._modalService.openModal(
       EditProductComponent,
       '300ms',
       '300ms',
@@ -72,6 +95,14 @@ export class ProductDetailsComponent implements OnInit {
       '500px',
       this.product
     );
+
+    dialogRef.afterClosed().subscribe({
+      next: (data: Product) => {
+        console.log(data);
+        this.product = data
+        
+      }
+    });
   }
 
   openAddCategory() {
@@ -95,9 +126,11 @@ export class ProductDetailsComponent implements OnInit {
         .addCategoryToProduct(categories, this.product.productId)
         .subscribe({
           next: (res) => {
-            console.log("cc");
-            
+            console.log(res);
+
             this._snackbarService.openSnackBar('Catégorie ajoutée !');
+            this.product.categories = res.data.categories;
+            // this.product.categories.splice(0, this.product.categories.length, ...res.categories);
           },
           error: (err) => {
             this.alertMessage = "Une erreur s'est produite.";
@@ -106,7 +139,7 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  openAddSize(){
+  openAddSize() {
     if (this.isSizeFormOpen) {
       this.isSizeFormOpen = false;
     } else {
@@ -118,20 +151,42 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  handleSize(){
-    if(this.sizeForm.valid) {
+  handleSize() {
+    if (this.sizeForm.valid) {
       const sizeForm: SizeForm = {
         productId: this.product.productId,
-        sizeId: this.sizeForm.get("sizeId")?.value,
+        sizeId: this.sizeForm.get('sizeId')?.value,
         stock: this.sizeForm.get('stock')?.value,
-      }
-      this._productService.addSizeToProduct(sizeForm).subscribe(res => console.log(res))
+      };
+      this._productService.addSizeToProduct(sizeForm).subscribe({
+        next: (res) => {
+          this.product.sizes = res.data.sizes;
+          this._snackbarService.openSnackBar('Taille ajoutée !');
+        },
+      });
     }
   }
 
   openUpdateStockModal(sizeId: number) {
-    this._modalService.openModal(UpdateStockComponent, '300ms', '300ms', '300px', '400px', {sizeId: sizeId, productId: this.productId });
-  }
+    const modalRef = this._modalService.openModal(
+      UpdateStockComponent,
+      '300ms',
+      '300ms',
+      '300px',
+      '400px',
+      { sizeId: sizeId, productId: this.productId }
+    );
 
- 
+    modalRef.afterClosed().subscribe({
+      next: (data: number) => {
+        this.product.sizes = this.product.sizes.filter((x) => {
+          if (x.sizeId === sizeId) {
+            // Question
+            return (x.stock = data);
+          }
+          return x;
+        });
+      },
+    });
+  }
 }

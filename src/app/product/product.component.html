@@ -7,28 +7,7 @@
     <button class="filter" mat-raised-button (click)="drawer.toggle()">Filtre</button>
       <section class="article">
       @for (product of products; track $index) {
-                <mat-card class="card">
-                  <mat-card-header>
-                    <div mat-card-avatar [class]="product.brand"></div>
-                    <mat-card-title>{{product.modelName}}</mat-card-title>
-                    <mat-card-subtitle>{{product.brand | uppercase}}</mat-card-subtitle>
-                  </mat-card-header>
-                  <img mat-card-image height="450px" [src]="imageUrl + '/' + product.image" alt="photo du produit">
-                  <mat-card-content>
-                    <p>{{product.description}}</p>
-                    <div class="price-section">
-                      <p [class]="product.discount > 0 ? 'on-discount' : ''">{{product.price | currency: 'EUR'}}  
-                      </p>
-                      @if (product.discount > 0) {
-                        <p class="discount">    -{{product.discount | discount}}%</p>
-                        <p>{{product.price - (product.price*product.discount) | currency: 'EUR'}}</p>
-                      }
-                    </div>
-                  </mat-card-content>
-                  <mat-card-actions>
-                    <button routerLink="/products/details/{{product.productId}}" mat-button>Détails</button>
-                  </mat-card-actions>
-                </mat-card>
+        <app-product-display [product]="product" />
             }
           </section>
     <button class="btn" mat-raised-button (click)="addMore()">Voir plus</button>

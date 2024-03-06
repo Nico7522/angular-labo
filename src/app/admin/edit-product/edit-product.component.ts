@@ -1,6 +1,7 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from '../../models/product.model';
 import { ModalService } from '../../services/modal.service';
 import { ProductService } from '../../services/product.service';
@@ -22,6 +23,7 @@ export class EditProductComponent implements OnInit {
     private _modalService: ModalService,
     private _snackbarService: SnackbarService,
     private _productService: ProductService,
+    private _dialogRef: MatDialogRef<EditProductComponent>
     
   ) {}
   ngOnInit(): void {
@@ -48,7 +50,9 @@ export class EditProductComponent implements OnInit {
         .update(this.editForm.value, this.product.productId)
         .subscribe({
           next: (res) => {
-            this._modalService.closeModal();
+            console.log(res);
+            
+            this._dialogRef.close(res.data);
             this._snackbarService.openSnackBar('Produit édité');
           },
           error: (err) => {this.alertMessage = "Une erreur s'est produite."},

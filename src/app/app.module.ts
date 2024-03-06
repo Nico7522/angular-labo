@@ -21,6 +21,7 @@ import { CartComponent } from './shared/cart/cart.component';
     // { provide: HTTP_INTERCEPTORS, useClass: tokenInterceptor, multi: true },
     provideAnimations(),
   ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

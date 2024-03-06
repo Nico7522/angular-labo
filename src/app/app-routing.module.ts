@@ -10,7 +10,7 @@ const routes: Routes = [
     pathMatch: 'full',
  },
   { path: "home", component: HomeComponent},
-  { path : "user", loadChildren : () => import("./user/user.module").then(m => m.UserModule)},
+  { path: "user", loadChildren : () => import("./user/user.module").then(m => m.UserModule)},
   { path: 'products', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
   { path: 'admin', canActivate: [checkAdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   ];

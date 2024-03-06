@@ -1,19 +1,30 @@
 <h1>Détails du produit</h1>
 <section class="product-details">
     @if (!product) {
-        <p>Chargement</p>
+    <p>Chargement</p>
     } @else {
-        <button (click)="back()" class="back" mat-raised-button color="primary">Retour</button>
-        
-            <mat-card class="card">
-                <mat-card-header class="header-container">
-                        <div mat-card-avatar [class]="product.brand"></div>
-                        <mat-card-title>{{product.modelName}}</mat-card-title>
-                      <mat-card-subtitle>  {{product.brand | uppercase}} </mat-card-subtitle>
-    
-                      <button class="btn-edit" (click)="edit()"  mat-mini-fab color="primary" ><mat-icon>mode_edit</mat-icon></button>
-                </mat-card-header>
-                <img mat-card-image [src]="imageUrl + '/' + product.image" alt="photo du produit">
+    <button (click)="back()" class="back" mat-raised-button color="primary">Retour</button>
+
+    <mat-card class="card">
+        <mat-card-header class="header-container">
+            <div mat-card-avatar [class]="product.brand"></div>
+            <mat-card-title>{{product.modelName}}</mat-card-title>
+            <mat-card-subtitle> {{product.brand | uppercase}} </mat-card-subtitle>
+
+            <button class="btn-edit" (click)="edit()" mat-mini-fab
+                color="primary"><mat-icon>mode_edit</mat-icon></button>
+        </mat-card-header>
+        <img mat-card-image [src]="imageUrl + '/' + product.image" alt="photo du produit">
+
+        <input type="file" class="file-input" (change)="onImgChange($event)" #fileUpload>
+
+        <div class="file-upload">
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                <mat-icon>image</mat-icon>
+            </button>
+        </div>
+            <p [class]="message === 'Image modifiée.' ? 'success' : 'alert'" *ngIf="message">{{message}}</p>
+
                 <mat-card-content>
                   <p>{{product.description}}</p>
                   <p [class]="product.discount > 0 ? 'on-discount' : ''">{{product.price | currency: 'EUR'}}</p>
@@ -79,10 +90,8 @@
                                         <input formControlName="stock" type="number" matInput>
                                   </mat-form-field>
                                 <button mat-button (click)="handleSize()">Valider</button>
-                            
                             </form>
                         </div>
-                        
                     </mat-tab>
                 </mat-tab-group>
                 
