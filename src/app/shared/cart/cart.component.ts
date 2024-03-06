@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { api } from '../../../../environement/environement'
 import { Subject } from 'rxjs';
 import { TokenService } from '../../services/token.service';
+import { SnackbarService } from '../../services/snackbar.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -16,7 +17,7 @@ export class CartComponent implements OnInit {
   private _totalPrice: number = 0;
   totalPrice: number = 0;
 
-  constructor(private _cartService: CartService, private _tokenService: TokenService) {}
+  constructor(private _cartService: CartService, private _tokenService: TokenService, private _snackbarService: SnackbarService) {}
 
   toggleCart(visible: boolean) {
     this._cartService.toggleCart(visible);
@@ -28,7 +29,13 @@ export class CartComponent implements OnInit {
 
   order() {
     if (this._tokenService.isTokenExist) {
-      this._cartService.order();
+      
+      this._cartService.order().subscribe({
+        next: () => {
+          this._snackbarService.openSnackBar('Commande passée !', 1000)
+        }
+      }
+      );
       
     }
   }

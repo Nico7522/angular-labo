@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { api } from '../../../environement/environement'
 import { Filter } from '../models/filter.model';
-import { editProductForm, Product } from '../models/product.model';
+import { CreateProductForm, editProductForm, Product } from '../models/product.model';
 import { Response } from '../models/response.model'
 import { SizeForm } from '../models/size.model';
 @Injectable({
@@ -30,6 +30,10 @@ export class ProductService {
 
   getById(productId: number): Observable<Response<Product>> {
     return this._httpClient.get<Response<Product>>(`${api.url}/product/${productId}`)
+  }
+
+  create(form: CreateProductForm) : Observable<Response<Product>> {
+    return this._httpClient.post<Response<Product>>(`${api.url}/product`, form)
   }
 
   filter(filterForm: Filter) : Observable<Response<Product[]>> {
@@ -65,7 +69,20 @@ export class ProductService {
     const formData: FormData = new FormData();
     formData.append('file', image);
     return this._httpClient.put<Response<string>>(`${api.url}/product/${productId}/image`, formData)
+  }
 
+  deleteCategory(productId: number, categoryId: number) : Observable<boolean>{
+    return this._httpClient.delete<boolean>(`${api.url}/product/${productId}/category/${categoryId}`);
+
+  }
+
+  deleteSize(productId: number, sizeId: number): Observable<boolean> {
+    console.log(typeof(productId), typeof(sizeId));
+
+    console.log(productId, sizeId);
+    
+    
+    return this._httpClient.delete<boolean>(`${api.url}/product/${productId}/size/${sizeId}`);
 
   }
 }

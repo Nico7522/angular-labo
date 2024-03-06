@@ -1,5 +1,6 @@
 <h1>Gestion des produits</h1>
 
+<button class="btn-create" mat-raised-button color="primary" routerLink="create">Ajouter un nouveau produit</button>
 <section class="article">
     @for (product of products; track $index) {
     <app-product-display [product]="product" />

@@ -1,0 +1,82 @@
+<h1>Ajout d'un nouveau produit</h1>
+
+<form  [formGroup]="createProductForm">
+    <mat-form-field>
+        <mat-label>Nom du modèle</mat-label>
+        <input type="text" matInput  
+               formControlName="modelName"
+              >
+               @if (createProductForm.get("modelName")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Marque</mat-label>
+        <input type="text" matInput  
+               formControlName="brand"
+              >
+               @if (createProductForm.get("brand")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input type="text" matInput  
+               formControlName="description"
+              >
+               @if (createProductForm.get("description")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-radio-group formControlName="sexe" aria-label="Sexe">
+        <mat-radio-button value="homme">Homme</mat-radio-button>
+        <mat-radio-button value="femme">Femme</mat-radio-button>
+        <mat-radio-button value="mixe">Mixe</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field>
+        <mat-label>Prix</mat-label>
+        <input type="text" matInput  
+               formControlName="price"
+              >
+               @if (createProductForm.get("price")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Promotion</mat-label>
+        <input type="text" matInput  
+               formControlName="discount"
+              >
+               @if (createProductForm.get("discount")?.invalid) {
+                  <mat-error>Champ requis*</mat-error>
+               }
+      </mat-form-field>
+
+      <!-- <mat-form-field>
+        <mat-label>Ajouter des catégories</mat-label>
+        <mat-select formControlName="categoriesId" multiple >
+          @for (category of categories; track category) {
+            <mat-option [value]="category.categoryId">{{category.categoryName}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ajouter des tailles</mat-label>
+        <mat-select (valueChange)="handleSizeChange($event)" formControlName="sizeStock" multiple >
+          @for (size of sizes; track size) {
+            <mat-option [value]="size.sizeId">{{size.size}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field> -->
+
+      <div class="btn-validation">
+          <button (click)="handleSubmit()" mat-raised-button color="primary">Créer</button>
+      </div>
+
+</form>

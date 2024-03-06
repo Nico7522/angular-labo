@@ -39,7 +39,7 @@
                             @for (category of product.categories; track $index) {
                                 <div class="category-display">
                                     <p>{{category.categoryName}}</p>
-                                    <button class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
+                                    <button (click)="deleteCategory(category.categoryId)" class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
 
                                 </div>
                             }
@@ -63,10 +63,10 @@
                     </mat-tab>
                     <mat-tab label="Tailles disponibles">
                         @if (product.sizes.length > 0) {
-                            @for (size of product.sizes; track size.sizeId) {
+                            @for (size of product.sizes; track size) {
                                 <div class="size-display">
                                     <p>Taille {{size.size}} - Stock : {{size.stock}}</p>
-                                    <button class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
+                                    <button (click)="deleteSize(size.sizeId)" class="btn-delete" mat-icon-button><mat-icon  class="delete" >delete_forever</mat-icon></button> 
                                     <button (click)="openUpdateStockModal(size.sizeId)" class="btn-delete" mat-icon-button><mat-icon  class="delete" >arrow_upward</mat-icon></button> 
 
                                 </div>

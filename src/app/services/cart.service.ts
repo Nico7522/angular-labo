@@ -98,7 +98,10 @@ export class CartService {
         orderProduct: this._cartProduct,
       };
 
-      return this._httpClient.post<Order>(`${api.url}/order`, order) 
+      console.log(order);
+      
+
+      return this._httpClient.post<Order>(`${api.url}/order`, order);
     
   }
 }

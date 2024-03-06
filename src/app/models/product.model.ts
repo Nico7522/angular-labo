@@ -19,6 +19,23 @@ export interface AvailableSizes {
   stock: number;
 }
 
+export interface CreateProductForm {
+  
+    modelName: string,
+    description: string,
+    brand: string,
+    sexe: string,
+    price: number,
+    discount: number,
+    categoriesId: number[],
+    sizeStock: SizeStock[]
+ }
+
+ export interface SizeStock {
+  sizeId: number, 
+  stock: number
+ }
+
 export interface editProductForm {
   modelName: string;
   description: string;

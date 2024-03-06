@@ -22,7 +22,7 @@
   }
   <mat-list-item>
 
-    <div matListItemTitle>Prix total : {{order.totalPrice | currency: 'EUR'}}</div>
+    <div matListItemTitle>Prix total : {{order.totalPrice | currency: 'EUR'}} <span class="reduction" *ngIf="order.totalReduction > 0"> -{{ order.totalReduction }}% </span></div>
 
   </mat-list-item>
 </mat-expansion-panel>

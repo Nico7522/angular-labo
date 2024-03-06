@@ -13,6 +13,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 import { SizeService } from '../../services/size.service';
 import { Size, SizeForm } from '../../models/size.model';
 import { UpdateStockComponent } from '../update-stock/update-stock.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -130,7 +131,6 @@ export class ProductDetailsComponent implements OnInit {
 
             this._snackbarService.openSnackBar('Catégorie ajoutée !');
             this.product.categories = res.data.categories;
-            // this.product.categories.splice(0, this.product.categories.length, ...res.categories);
           },
           error: (err) => {
             this.alertMessage = "Une erreur s'est produite.";
@@ -163,6 +163,9 @@ export class ProductDetailsComponent implements OnInit {
           this.product.sizes = res.data.sizes;
           this._snackbarService.openSnackBar('Taille ajoutée !');
         },
+        error: (err) => {
+            this.alertMessage = "Une erreur s'est produite.";
+        },
       });
     }
   }
@@ -181,12 +184,41 @@ export class ProductDetailsComponent implements OnInit {
       next: (data: number) => {
         this.product.sizes = this.product.sizes.filter((x) => {
           if (x.sizeId === sizeId) {
-            // Question
             return (x.stock = data);
           }
           return x;
         });
       },
     });
+  }
+
+  deleteCategory(categoryId: number) {
+    this._productService.deleteCategory(this.productId, categoryId).subscribe({
+      next: () => {
+        this._snackbarService.openSnackBar('Catégorie supprimée !')
+        this.product.categories = this.product.categories.filter(x => {
+          return x.categoryId !== categoryId;
+        })
+      },
+        error: (err) => {
+          this.alertMessage = "Une erreur s'est produite.";
+      },
+    })
+    
+
+  } 
+
+  deleteSize(sizeId: number) {
+    this._productService.deleteSize(this.product.productId, sizeId).subscribe({
+      next: () => {
+        this._snackbarService.openSnackBar('Taille supprimée !')
+        this.product.sizes = this.product.sizes.filter(x => {
+          return x.sizeId !== sizeId;
+        })
+      },
+      error: () => {
+        this.alertMessage = "Une erreur s'est produite."
+      }
+    })
   }
 }

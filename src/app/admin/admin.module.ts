@@ -11,6 +11,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UpdateStockComponent } from './update-stock/update-stock.component';
     ProductDetailsComponent,
     EditProductComponent,
     UpdateStockComponent,
+    CreateProductComponent,
   ],
   imports: [
     CommonModule,

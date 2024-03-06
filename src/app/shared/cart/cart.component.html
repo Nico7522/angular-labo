@@ -21,7 +21,7 @@
         }
         @if (totalPrice > 0) {
             <hr>
-          <p class="total-price">Prix total : {{totalPrice | currency: 'EUR'}}</p>
+          <p class="total-price">Prix total : {{totalPrice | currency: 'EUR'}} </p>
           <button class="btn-order" (click)="order()"  mat-raised-button color="primary">Commander</button>
 
         }
