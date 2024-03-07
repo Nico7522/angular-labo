@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { SetStockComponent } from './create-product/set-stock/set-stock.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
     EditProductComponent,
     UpdateStockComponent,
     CreateProductComponent,
+    SetStockComponent,
   ],
   imports: [
     CommonModule,

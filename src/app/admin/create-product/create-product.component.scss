@@ -40,3 +40,14 @@ mat-radio-group {
     display: flex;
     flex-direction: row;
 }
+
+.selected-size {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-delete {
+    margin-top: -3px;
+}

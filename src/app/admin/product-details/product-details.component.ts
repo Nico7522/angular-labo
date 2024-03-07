@@ -99,8 +99,9 @@ export class ProductDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe({
       next: (data: Product) => {
-        console.log(data);
-        this.product = data
+        if(data) {
+          this.product = data
+        }
         
       }
     });

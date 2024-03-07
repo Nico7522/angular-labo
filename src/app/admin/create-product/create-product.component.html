@@ -39,7 +39,7 @@
 
       <mat-form-field>
         <mat-label>Prix</mat-label>
-        <input type="text" matInput  
+        <input type="number" matInput  
                formControlName="price"
               >
                @if (createProductForm.get("price")?.invalid) {
@@ -49,7 +49,7 @@
 
       <mat-form-field>
         <mat-label>Promotion</mat-label>
-        <input type="text" matInput  
+        <input type="number" matInput  
                formControlName="discount"
               >
                @if (createProductForm.get("discount")?.invalid) {
@@ -57,7 +57,7 @@
                }
       </mat-form-field>
 
-      <!-- <mat-form-field>
+      <mat-form-field>
         <mat-label>Ajouter des catégories</mat-label>
         <mat-select formControlName="categoriesId" multiple >
           @for (category of categories; track category) {
@@ -68,12 +68,19 @@
 
       <mat-form-field>
         <mat-label>Ajouter des tailles</mat-label>
-        <mat-select (valueChange)="handleSizeChange($event)" formControlName="sizeStock" multiple >
+        <mat-select (valueChange)="handleSizeChange($event)" formControlName="sizeStock">
           @for (size of sizes; track size) {
-            <mat-option [value]="size.sizeId">{{size.size}}</mat-option>
+            <mat-option [value]="size">{{size.size}}</mat-option>
           }
         </mat-select>
-      </mat-form-field> -->
+      </mat-form-field>
+
+      @for (st of sizeStock; track $index) {
+        <div class="selected-size">
+            <p>Taille : {{st.size}} - Stock : {{st.stock}}</p>
+            <button (click)="removeSizeStock(st.sizeId)" class="btn-delete" mat-icon-button color="warn"><mat-icon  class="delete" >delete_forever</mat-icon></button> 
+        </div>
+      }
 
       <div class="btn-validation">
           <button (click)="handleSubmit()" mat-raised-button color="primary">Créer</button>

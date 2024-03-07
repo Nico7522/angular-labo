@@ -1,0 +1,11 @@
+<h1>Entrez la quantité</h1>
+<mat-form-field>
+    <mat-label>Stock</mat-label>
+    <input type="number" matInput  
+           [(ngModel)]="stock"
+          >
+  </mat-form-field>
+  <div class="btn">
+      <button (click)="validate()" mat-raised-button color="accent">Valider</button>
+      <button (click)="close()" mat-raised-button color="warn">Annuler</button>
+  </div>

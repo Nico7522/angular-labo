@@ -1,0 +1,16 @@
+.btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    margin: 5px;
+
+}
+
+mat-form-field {
+    width: 50% !important;
+    margin:  0 auto;
+}

@@ -41,7 +41,7 @@ export class EditProductComponent implements OnInit {
   }
 
   close() {
-    this._modalService.closeModal();
+    this._dialogRef.close();
   }
 
   handleSubmit() {

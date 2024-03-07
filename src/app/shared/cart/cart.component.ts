@@ -49,7 +49,6 @@ export class CartComponent implements OnInit {
 
     this._cartService.$totalPrice.subscribe(total => {
       this._totalPrice = total; 
-      console.log(total);
       this.totalPrice = Number(this._totalPrice.toFixed(2))
     });
 

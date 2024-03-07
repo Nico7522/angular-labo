@@ -32,6 +32,7 @@ export interface CreateProductForm {
  }
 
  export interface SizeStock {
+  size?: number
   sizeId: number, 
   stock: number
  }

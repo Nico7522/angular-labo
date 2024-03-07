@@ -33,6 +33,8 @@ export class ProductService {
   }
 
   create(form: CreateProductForm) : Observable<Response<Product>> {
+    console.log(form);
+    
     return this._httpClient.post<Response<Product>>(`${api.url}/product`, form)
   }
 
