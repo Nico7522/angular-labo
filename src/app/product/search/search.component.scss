@@ -70,10 +70,11 @@ mat-drawer {
 }
 
 .filtered-article {
+  margin-top: 15px;
   display: flex;
-  align-items: center;
-  width: 10%;
-  margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: hidden;
 }
 
 

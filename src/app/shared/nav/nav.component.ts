@@ -1,10 +1,9 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
+import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { ModalService } from '../../services/modal.service';
-import { SidemenuService } from '../../services/sidemenu.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { TokenService } from '../../services/token.service';
 import { LoginComponent } from '../../user/login/login.component';
 
@@ -20,11 +19,11 @@ export class NavComponent implements OnInit {
 
   constructor(
     private _modalService: ModalService,
-    private _sideMenuService: SidemenuService,
     rend: Renderer2,
     private _tokenService: TokenService,
-    private _snackBar: MatSnackBar,
-    private _cartService: CartService
+    private _snackbarService: SnackbarService,
+    private _cartService: CartService,
+    private _router: Router
   ) {
     rend.listen('window', 'click', (e: Event) => {
       if (this.isOpen) {
@@ -62,14 +61,8 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this._tokenService.emitTokenExist();
-    this.openSnackBar();
-  }
-
-  openSnackBar() {
-    this._snackBar.openFromComponent(SnackbarComponent, {
-      duration: 1000,
-      data: 'Déconnecté !',
-    });
+    this._snackbarService.openSnackBar("Déconnecté !")
+      this._router.navigate(['/']);
   }
 
   isAdmin(): boolean {

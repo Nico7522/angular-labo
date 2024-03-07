@@ -36,14 +36,29 @@ section {
     margin-bottom: 15px;
 }
 
+.mat-mdc-card-header-text {
+    display: none;
+}
+
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.presentation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
-.btn-edit {
+.title, .edit-delete {
+    margin-top: -15px;
+}
+
+
+.btn-edit, .btn-delete {
     margin-left: auto;
 }
 
@@ -98,4 +113,8 @@ section {
   .alert {
     color: red;
     text-align: center;
+  }
+
+  .edit-delete > button {
+    margin: 5px;
   }

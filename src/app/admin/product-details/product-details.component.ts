@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { api } from '../../../../environement/environement';
@@ -14,6 +14,7 @@ import { SizeService } from '../../services/size.service';
 import { Size, SizeForm } from '../../models/size.model';
 import { UpdateStockComponent } from '../update-stock/update-stock.component';
 import { map } from 'rxjs';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-product-details',
@@ -47,7 +48,8 @@ export class ProductDetailsComponent implements OnInit {
     private _categoryService: CategoryService,
     private _snackbarService: SnackbarService,
     private _sizeService: SizeService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class ProductDetailsComponent implements OnInit {
         },
         error: (err) => {
           this.message = 'Une erreur est survenue.';
-        }
+        },
       });
   }
 
@@ -99,11 +101,10 @@ export class ProductDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe({
       next: (data: Product) => {
-        if(data) {
-          this.product = data
+        if (data) {
+          this.product = data;
         }
-        
-      }
+      },
     });
   }
 
@@ -165,7 +166,7 @@ export class ProductDetailsComponent implements OnInit {
           this._snackbarService.openSnackBar('Taille ajoutée !');
         },
         error: (err) => {
-            this.alertMessage = "Une erreur s'est produite.";
+          this.alertMessage = "Une erreur s'est produite.";
         },
       });
     }
@@ -196,30 +197,52 @@ export class ProductDetailsComponent implements OnInit {
   deleteCategory(categoryId: number) {
     this._productService.deleteCategory(this.productId, categoryId).subscribe({
       next: () => {
-        this._snackbarService.openSnackBar('Catégorie supprimée !')
-        this.product.categories = this.product.categories.filter(x => {
+        this._snackbarService.openSnackBar('Catégorie supprimée !');
+        this.product.categories = this.product.categories.filter((x) => {
           return x.categoryId !== categoryId;
-        })
+        });
       },
-        error: (err) => {
-          this.alertMessage = "Une erreur s'est produite.";
+      error: (err) => {
+        this.alertMessage = "Une erreur s'est produite.";
       },
-    })
-    
-
-  } 
+    });
+  }
 
   deleteSize(sizeId: number) {
     this._productService.deleteSize(this.product.productId, sizeId).subscribe({
       next: () => {
-        this._snackbarService.openSnackBar('Taille supprimée !')
-        this.product.sizes = this.product.sizes.filter(x => {
+        this._snackbarService.openSnackBar('Taille supprimée !');
+        this.product.sizes = this.product.sizes.filter((x) => {
           return x.sizeId !== sizeId;
-        })
+        });
       },
       error: () => {
-        this.alertMessage = "Une erreur s'est produite."
-      }
-    })
+        this.alertMessage = "Une erreur s'est produite.";
+      },
+    });
+  }
+
+  delete() {
+    const dialogRef = this._modalService.openModal(
+      ConfirmDeleteComponent,
+      '200ms',
+      '200ms'
+    );
+
+    dialogRef.afterClosed().subscribe({
+      next: (confirmation) => {
+        if (confirmation) {
+          this._productService.delete(this.productId).subscribe({
+            next: () => {
+              this._snackbarService.openSnackBar('Produit supprimé !');
+              this._router.navigate(['/admin/product']);
+            },
+            error: (err) => {
+              this.alertMessage = "Une erreur s'est produite.";
+            },
+          });
+        }
+      },
+    });
   }
 }

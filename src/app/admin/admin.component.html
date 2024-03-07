@@ -4,7 +4,7 @@
     <button mat-raised-button>Produits</button>
 </div> -->
 <h1>Gestion</h1>
-<mat-grid-list cols="3" >
+<mat-grid-list cols="4"  >
     <mat-grid-tile>
         <button routerLink="/" mat-raised-button color="primary">Acceuil</button>
    
@@ -17,6 +17,12 @@
     <mat-grid-tile>
     
         <button routerLink="product" mat-raised-button color="accent">Produits</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="custom-theme">
+            <button routerLink="order" mat-raised-button >Commandes</button>
+        </div>
     </mat-grid-tile>
   </mat-grid-list>
 

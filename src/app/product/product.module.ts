@@ -8,7 +8,7 @@ import { DiscountPipe } from '../pipes/discount.pipe';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -25,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     ProductRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    FormsModule
     
   ],
 

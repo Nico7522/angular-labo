@@ -13,6 +13,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { SetStockComponent } from './create-product/set-stock/set-stock.component';
+import { ConfirmDeleteComponent } from './product-details/confirm-delete/confirm-delete.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SetStockComponent } from './create-product/set-stock/set-stock.componen
     UpdateStockComponent,
     CreateProductComponent,
     SetStockComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     CommonModule,

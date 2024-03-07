@@ -28,6 +28,19 @@
         <mat-radio-button value="femme">Femme</mat-radio-button>
         <mat-radio-button value="mixe">Mixe</mat-radio-button>
       </mat-radio-group>
+<div >
+  <label >Prix minimum : {{minPrice.value | currency: "EUR"}} </label>
+</div>
+<mat-slider max="900">
+  <input matSliderThumb formControlName="minPrice" #minPrice>
+</mat-slider>
 
-      <button mat-raised-button type="submit" color="primary">Rechercher</button>
+<div >
+  <label >Prix maximum : {{maxPrice.value | currency: "EUR"}} </label>
+</div>
+<mat-slider  max="900">
+  <input matSliderThumb formControlName="maxPrice" #maxPrice>
+</mat-slider>
+
+<button mat-raised-button type="submit" color="primary">Rechercher</button>
 </form>

@@ -3,4 +3,6 @@ export interface Filter {
     sexe: string;
     category: string;
     brand: string;
+    minPrice: number;
+    maxPrice: number;
   }

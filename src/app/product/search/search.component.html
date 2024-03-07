@@ -2,7 +2,8 @@
 <button class="back" routerLink="/products" mat-raised-button color="primary">Retour</button>
 <section class="filtered-article">
   @for (product of filteredProduct; track $index) {
-            <mat-card class="card">
+    <app-product-display [product]="product" />
+            <!-- <mat-card class="card">
               <mat-card-header>
                 <div mat-card-avatar [class]="product.brand"></div>
                 <mat-card-title>{{product.modelName}}</mat-card-title>
@@ -23,6 +24,6 @@
               <mat-card-actions>
                 <button routerLink="/products/details/{{product.productId}}" mat-button>Détails</button>
               </mat-card-actions>
-            </mat-card>
+            </mat-card> -->
         }
       </section>

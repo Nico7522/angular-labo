@@ -25,12 +25,18 @@ export class SearchComponent implements OnInit {
       sexe: '',
       category: '',
       brand: '',
+      minPrice: 0,
+      maxPrice: 0
     };
     this._activatedRoute.queryParams.subscribe((params) => {
         (filter.modelName = params['modelName']),
         (filter.sexe = params['sexe']),
         (filter.category = params['category']),
         (filter.brand = params['brand']);
+        (filter.minPrice = params['minPrice']),
+        (filter.maxPrice = params['maxPrice']),
+
+        
 
       this._productService
         .filter(filter)

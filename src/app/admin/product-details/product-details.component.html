@@ -7,12 +7,22 @@
 
     <mat-card class="card">
         <mat-card-header class="header-container">
-            <div mat-card-avatar [class]="product.brand"></div>
-            <mat-card-title>{{product.modelName}}</mat-card-title>
-            <mat-card-subtitle> {{product.brand | uppercase}} </mat-card-subtitle>
+            <div class="presentation">
+                <div mat-card-avatar [class]="product.brand"></div>
+                <div class="title">
+                    <mat-card-title>{{product.modelName}}</mat-card-title>
+                    <mat-card-subtitle> {{product.brand | uppercase}} </mat-card-subtitle>
 
-            <button class="btn-edit" (click)="edit()" mat-mini-fab
-                color="primary"><mat-icon>mode_edit</mat-icon></button>
+                </div>
+
+            </div>
+
+            <div class="edit-delete">
+                <button class="btn-edit" (click)="edit()" mat-mini-fab
+                    color="primary"><mat-icon>mode_edit</mat-icon></button>
+                    <button class="btn-delete" (click)="delete()" mat-mini-fab
+                    color="warn"><mat-icon>delete</mat-icon></button>
+            </div>
         </mat-card-header>
         <img mat-card-image [src]="imageUrl + '/' + product.image" alt="photo du produit">
 

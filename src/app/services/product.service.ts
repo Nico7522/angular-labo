@@ -79,13 +79,11 @@ export class ProductService {
   }
 
   deleteSize(productId: number, sizeId: number): Observable<boolean> {
-    console.log(typeof(productId), typeof(sizeId));
-
-    console.log(productId, sizeId);
-    
-    
     return this._httpClient.delete<boolean>(`${api.url}/product/${productId}/size/${sizeId}`);
+  }
 
+  delete(productId: number) : Observable<Response<Product>> {
+    return this._httpClient.delete<Response<Product>>(`${api.url}/product/${productId}`)
   }
 }
 

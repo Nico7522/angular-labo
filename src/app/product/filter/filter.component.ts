@@ -10,6 +10,8 @@ import { Filter } from '../../models/filter.model';
 })
 export class FilterComponent implements OnInit {
   filterForm!: FormGroup
+
+  minPrice!: number;
   constructor(private _formBuilder: FormBuilder, private _router: Router){}
   categories: string[] = [ "Après-Ski", "Chaussure de sécurité", "Sport"]
   brands: string[] = [ "Nike", "Adidas", "Puma"]
@@ -19,6 +21,8 @@ export class FilterComponent implements OnInit {
       category: [''],
       sexe: [''],
       brand: [''],
+      minPrice: [0],
+      maxPrice: [0]
     })
   }
 
@@ -26,12 +30,18 @@ export class FilterComponent implements OnInit {
 
   handleSubmit() {
 
+    console.log(this.filterForm.get('minPrice')?.value);
+    
+
     if (this.filterForm.valid) {
       const filter: Filter = {
         modelName: this.filterForm.get('modelName')?.value,
         category: this.filterForm.get('category')?.value,
         sexe: this.filterForm.get('sexe')?.value,
         brand: this.filterForm.get('brand')?.value,
+        minPrice: this.filterForm.get('minPrice')?.value > 0 ? this.filterForm.get('minPrice')?.value : null,
+        maxPrice: this.filterForm.get('maxPrice')?.value > 0 ? this.filterForm.get('maxPrice')?.value : null
+
       };
   
       this._router.navigate(['/products/filter'], {queryParams: filter })
