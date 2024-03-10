@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-filter',
@@ -10,12 +12,17 @@ import { Filter } from '../../models/filter.model';
 })
 export class FilterComponent implements OnInit {
   filterForm!: FormGroup
-
+  categories: Category[] = [];
   minPrice!: number;
-  constructor(private _formBuilder: FormBuilder, private _router: Router){}
-  categories: string[] = [ "Après-Ski", "Chaussure de sécurité", "Sport"]
+  constructor(private _formBuilder: FormBuilder, private _router: Router, private _categorieService: CategoryService){}
   brands: string[] = [ "Nike", "Adidas", "Puma"]
   ngOnInit(): void {
+    this._categorieService.getAll().subscribe({
+      next: (categories) => {
+        this.categories = categories
+      },
+      error: () => {}
+    })
     this.filterForm = this._formBuilder.group({
       modelName: [''],
       category: [''],
