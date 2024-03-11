@@ -38,9 +38,14 @@ export class AuthService {
   }
 
   editEmail(email: string, userId: number) : Observable<any> {
-
-    
     return this._httpClient.patch(`${api.url}/auth/${userId}/update/email`,  {email}, {responseType: 'text'})
+  }
 
+  resetPassword(password: string, id: number) : Observable<boolean> {
+    return this._httpClient.patch<boolean>(`${api.url}/auth/${id}/update/password`, {password})
+  }
+
+  requestResetPassword(email: string): Observable<boolean>  {
+    return this._httpClient.post<boolean>(`${api.url}/auth/reset/password`, {email})
   }
 }

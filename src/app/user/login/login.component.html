@@ -17,6 +17,7 @@
                 <mat-error >Veuillez rentrer un mot de passe valide</mat-error>
              }
           </mat-form-field>
+          <a (click)="closeModal()" routerLink="/user/passwordreset">Mot de passe oublié ?</a>
           <div class="button">
               <button mat-flat-button color="primary">Se connecter</button>
               <button (click)="closeModal()" mat-flat-button color="primary">Retour</button>

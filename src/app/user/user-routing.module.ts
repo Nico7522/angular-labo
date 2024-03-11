@@ -7,6 +7,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { LoginComponent } from './login/login.component';
 import { ProfilComponent } from './profil/profil.component';
 import { RegisterComponent } from './register/register.component';
+import { ResetPasswordConfirmComponent } from './reset-password-confirm/reset-password-confirm.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
@@ -19,6 +21,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'edit/adress/:id', canActivate: [AuthGuard], component: EditAddressComponent },
   { path: 'edit/:id', canActivate: [AuthGuard], component: EditUserComponent },
+  { path: 'passwordreset', component: ResetPasswordComponent },
+  { path: ':id/newpassword', component: ResetPasswordConfirmComponent },
+
+
 ];
 
 @NgModule({

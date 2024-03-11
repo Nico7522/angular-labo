@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateAdressComponent } from './create-adress/create-adress.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
 import { ConfirmAddressDeleteComponent } from './profil/confirm-address-delete/confirm-address-delete.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordConfirmComponent } from './reset-password-confirm/reset-password-confirm.component';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { ConfirmAddressDeleteComponent } from './profil/confirm-address-delete/c
         CreateAdressComponent,
         EditAddressComponent,
         ConfirmAddressDeleteComponent,
+        ResetPasswordComponent,
+        ResetPasswordConfirmComponent,
     ],
     imports: [
         UserRoutingModule,
